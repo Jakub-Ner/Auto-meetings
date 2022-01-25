@@ -3,7 +3,7 @@
 **Now program:**
 - Searches on my mailbox for mails from my university profesors.
 - Looks for links to Zoom Meetings.
-- Saves links and date of meetings in JSON.
+- Saves links and dates of meetings in JSON.
 - ---------------------------------------------
 *Soon program will:*
 - *Starts itself after PC turn on.*
