@@ -6,6 +6,6 @@
 - Saves links and date of meetings in JSON.
 - ---------------------------------------------
 *Soon program will:*
-- *Start itself after PC turn on.*
-- *Run in the background.*
-- *Join meetings, when it should.*
+- *Starts itself after PC turn on.*
+- *Runs in the background.*
+- *Joins meetings, when it should.*
