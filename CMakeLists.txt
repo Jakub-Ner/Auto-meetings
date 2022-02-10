@@ -8,5 +8,4 @@ include_directories(.)
 add_executable(automation_of_studies
         python_scripts/get_links_from_mails.py
         main.cpp
-        main.h
         get_links.sh)
