@@ -1,0 +1,10 @@
+#ifndef AUTOMATION_OF_STUDIES_MAIN_H
+#define AUTOMATION_OF_STUDIES_MAIN_H
+
+
+class main {
+
+};
+
+
+#endif //AUTOMATION_OF_STUDIES_MAIN_H
