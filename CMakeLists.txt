@@ -7,5 +7,7 @@ include_directories(.)
 
 add_executable(automation_of_studies
         python_scripts/get_links_from_mails.py
-        main.cpp
-        get_links.sh)
+        meetings.cpp
+        get_links.sh
+        options.cpp options.h
+        )
