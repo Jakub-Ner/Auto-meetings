@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include "options.h"
 
-bool help() {
+void help() {
     std::cout << R"(Welcome in Auto-meetings!
 This program helps dealing with remote meetings.
 
@@ -16,7 +16,7 @@ OPTIONS
 }
 //bool menu();
 
-bool add_meeting(std::string &link, std::string &date) {
+void add_meeting(const std::string &link, std::string date) {
     while(!validate(date)){
         std::cout<<"incorrect format of the date. Should be: hh-mm DD-MM-YYYY\n for example 12:58 27-01-2023";
         std::cin>>date;
@@ -53,7 +53,7 @@ bool validate(const std::string &date) {
 
 bool sleep(int time_to_sleep) {
 //        system("sudo rtcwake -u -s time_to_sleep -m mem"); <- have to figure out the other way
-
+    return false;
 }
 
 void record() {
