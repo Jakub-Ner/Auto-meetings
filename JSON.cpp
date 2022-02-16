@@ -15,20 +15,33 @@ void repair_json(std::string &content) {
 
 
 std::string read_json() {
-    std::ifstream f("./variables/meetings.json"); //taking file as inputstream
+    std::string path = "variables/meetings.json";
+    std::ifstream file;
+    file.open(path);
     std::string content;
-    if (f) {
+
+    // if file exist and is not empty:
+    if (file && file.peek() != std::ifstream::traits_type::eof()) {
         std::ostringstream ss;
-        ss << f.rdbuf(); // reading data
-        content = ss.str();
+        ss << file.rdbuf(); // reading data
+        file.close();
+        return ss.str();
     }
-    return content;
+    else {
+        file.close();
+        std::ofstream new_file;
+        new_file.open(path);
+
+        new_file << "{}";
+        new_file.close();
+        return "{}"; // create new json
+    }
 }
 
 void generate_names() {
     std::string name = "meeting";
     std::ofstream fout;
-    fout.open("./variables/names.txt");
+    fout.open("variables/names.txt");
 
     for (int j = 0; j < 10; j++) {
         const char id1 = j + '0';
