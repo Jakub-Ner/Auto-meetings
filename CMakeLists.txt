@@ -10,5 +10,6 @@ add_executable(automation_of_studies
         main.cpp main.h
         get_links.sh
         options.cpp options.h
-        test_mode.h
+        variables/test_mode.h
+        JSON.cpp JSON.h
         )

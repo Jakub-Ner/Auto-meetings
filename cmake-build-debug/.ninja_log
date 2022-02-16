@@ -1,10 +1,12 @@
 # ninja log v5
 2	473	1645015116468077700	CMakeFiles/automation_of_studies.dir/meetings.cpp.o	7a84ae4ab843c9b0
-534	628	1645015116622516100	automation_of_studies	82ba424a9b36bef
-1	50	1644496781607534700	CMakeFiles/automation_of_studies.dir/main.cpp.o	62722ac2cf474564
-1	55	1645015957225962900	build.ninja	c2ed3708ce5c1c1a
-2	534	1645015116528939700	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
-1	42	1645015957225962900	build.ninja	c2ed3708ce5c1c1a
-1	378	1645015957620481400	CMakeFiles/automation_of_studies.dir/main.cpp.o	62722ac2cf474564
-1	432	1645015957674375700	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
-433	516	1645015957757713100	automation_of_studies	7e842f6c8e3eccc2
+483	582	1645019959120516200	automation_of_studies	ef6d7580b7ff0a4
+1	552	1645019116136452000	CMakeFiles/automation_of_studies.dir/main.cpp.o	62722ac2cf474564
+1	42	1645020203640262500	build.ninja	c2ed3708ce5c1c1a
+2	416	1645019138988432000	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
+1	482	1645019959021112400	CMakeFiles/automation_of_studies.dir/JSON.cpp.o	5bba18e987b5d4dc
+1	43	1645020203640262500	build.ninja	c2ed3708ce5c1c1a
+1	428	1645020204082924200	CMakeFiles/automation_of_studies.dir/main.cpp.o	62722ac2cf474564
+2	437	1645020204091809300	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
+2	448	1645020204103358800	CMakeFiles/automation_of_studies.dir/JSON.cpp.o	5bba18e987b5d4dc
+448	537	1645020204191200500	automation_of_studies	ef6d7580b7ff0a4

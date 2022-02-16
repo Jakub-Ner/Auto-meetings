@@ -2,9 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-#include <sstream>
 #include "options.h"
-#include "test_mode.h"
+#include "variables/test_mode.h"
+#include "JSON.h"
 
 
 void help() {
@@ -37,16 +37,20 @@ void add_meeting(const std::string &link, std::string date) {
 }
 
 bool save_meeting(const std::string &link, const std::string &date) {
-    std::ifstream f("meetings.json"); //taking file as inputstream
-    std::string str;
-    if (f) {
-        std::ostringstream ss;
-        ss << f.rdbuf(); // reading data
-        str = ss.str();
-    }
-    std::cout << str;
+    std::string content = read_json();
+    if (content[content.size() - 1] != '}')
+        check_json_correctness();
+
+    // preprocess
+    content[content.size() - 2] = ',';
+    content.erase(content.end()-1);
+
+    // now can add data
+    content += "\n";
+    std::cout << content;
     return false;
 }
+
 
 bool validate(const std::string &date) {
     if (date.size() != 16) return false; // "hh:mm DD-MM-YYYY".size() = 16

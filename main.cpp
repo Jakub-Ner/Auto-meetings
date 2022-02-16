@@ -1,17 +1,21 @@
 #include <stdlib.h>
 #include <iostream>
 #include <cstring>
+#include <fstream>
 #include "options.h"
 #include "main.h"
-#include "test_mode.h"
+#include "variables/test_mode.h"
+#include "JSON.h"
 
 std::string RECORD_SETTING = "11";
 bool SLEEP_SETTING = false;
 
 int main(int argc, char *argv[]) {
+    generate_names();
 #ifdef test_mode
     test();
 #else
+    check_json_correctness()
     if(argc > 1 ){
         choose_option(argc, argv);
     }
@@ -35,3 +39,4 @@ void test() {
     add_meeting("https://pwr-edu.zoom.us/j/95359922014?pwd=S0Z2c0w3L0pZSTVtNzJqZTJFQkIrQT09", "12:35 16-02-2022");
 
 }
+
