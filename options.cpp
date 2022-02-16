@@ -14,7 +14,6 @@ OPTIONS
     -r, --record            Set you recording preferences
 )";
 }
-//bool menu();
 
 void add_meeting(const std::string &link, std::string date) {
     while(!validate(date)){
@@ -44,7 +43,7 @@ bool validate(const std::string &date) {
     if (minute > "59" && minute < "00") return false;
     if (hour > "23" && hour < "00") return false;
 
-    if (day > "31" && day < "01") return false; // rozne miesiace maja rozna ilosc dni
+    if (day > "31" && day < "01") return false; // months length differs
     if (month > "12" && month < "01") return false;
     if (year < "2022") return false;
 

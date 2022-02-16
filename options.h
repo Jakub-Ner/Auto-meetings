@@ -1,7 +1,6 @@
 #ifndef AUTOMATION_OF_STUDIES_OPTIONS_H
 #define AUTOMATION_OF_STUDIES_OPTIONS_H
 
-//bool menu();
 void add_meeting(const std::string &link, std::string date);
 void help();
 void record();
