@@ -35,7 +35,7 @@ class Mail:
             if "terminie" in word:
                 date = [words[i+j] for j in range(1,5)]
                 for i in range(i+4, len(words)):
-                    if "https://pwr-edu.zoom" in words[i]:
+                    if "https://pwr-edu.zoom" in words[i]: # <- to repair
                         return words[i], date
         return "", []
     
@@ -49,9 +49,10 @@ lectures = LECTURES
 
 M =Mail()
 for mail in lectures:
-    url, date = M.read_mails(mail)
-    lectures[mail]["link"]=url
-    lectures[mail]["date"]=date
+    if("@" in mail):
+        url, date = M.read_mails(mail)
+        lectures[mail]["link"]=url
+        lectures[mail]["date"]=date
 
 M.end()
 

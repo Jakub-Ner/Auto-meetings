@@ -27,9 +27,6 @@ void add_meeting(const std::string &link, std::string date) {
         std::string command = "xdg-open " + link;
         system(command.c_str());
     }
-    std::cout << "go Next ";
-    std::cin>>input;
-    std::cout<<input;
 
 }
 
