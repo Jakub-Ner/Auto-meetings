@@ -19,7 +19,7 @@ public:
 
     void read_json();
 
-    bool save_meeting(const std::string &link, const std::string &date);
+    void save_meeting(const std::string &link, const std::string &date);
 
 private:
 

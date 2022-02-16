@@ -40,7 +40,7 @@ std::string JSON::read_data_at_once(std::ifstream &file) {
     return data.str();
 }
 
-bool JSON::save_meeting(const std::string &link, const std::string &date) {
+void JSON::save_meeting(const std::string &link, const std::string &date) {
     _link = link;
     _date = date;
     read_json();
@@ -54,16 +54,26 @@ bool JSON::save_meeting(const std::string &link, const std::string &date) {
     // now can easily add data
     convert_data_to_json();
 
-    std::cout << _content;
-    return false;
+    std::ofstream fout;
+    fout.open(json_path);
+    fout << _content;
+    fout.close();
 }
 
 void JSON::convert_data_to_json() {
     get_name();
-    std::cout<< _name;
-    _content += "\n\"" + _name+"\": {\n"
-                             "   \"date\": [\n";
-
+    std::cout << _name;
+    _content += "\n\"" + _name + "\": {\n"
+                + "     \"date\": [\n"
+                +"          \"" + _date.substr(6, 2) + "\",\n"   // day
+                +"          \"" + _date.substr(9, 2) + "\",\n"   // month
+                +"          \"" + _date.substr(12, 4) +"\",\n"   // year
+                +"          \"" + _date.substr(0, 2) + "\",\n"   // hour
+                +"          \"" + _date.substr(3, 2) + "\"\n"    // minute
+                +"          " + "],\n"
+                +"      \"link\": \"" + _link + "\"\n"
+                +"  }\n"
+                +"}";
 }
 
 void JSON::get_name() {
@@ -85,7 +95,7 @@ void JSON::extract_name_and_remove_from_list(std::string &file_content) {
     _name = "";
     int counter = file_content.size() - 1;
 
-    if (counter == 0){
+    if (counter <= 0) {
         generate_names();
     }
 
@@ -93,8 +103,8 @@ void JSON::extract_name_and_remove_from_list(std::string &file_content) {
         _name += file_content[counter];
         counter--;
     }
-    if(!file_content.empty())
-        file_content.erase(counter, file_content.size()-1);
+    if (!file_content.empty())
+        file_content.erase(counter, file_content.size() - 1);
 }
 
 void JSON::generate_names() {
@@ -105,7 +115,7 @@ void JSON::generate_names() {
         const char id1 = j + '0';
         for (int i = 9; i >= 0; i--) {
             const char id2 = i + '0';
-            fout << ';' << id1 << id2<<"gniteem";
+            fout << ';' << id2 << id1 << "gniteem";
         }
     }
     fout.close();

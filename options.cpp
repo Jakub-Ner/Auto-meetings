@@ -40,8 +40,8 @@ void add_meeting(const std::string &link, std::string date) {
 bool validate(const std::string &date) {
     if (date.size() != 16) return false; // "hh:mm DD-MM-YYYY".size() = 16
 
-    std::string minute = date.substr(0, 2);
-    std::string hour = date.substr(3, 2);
+    std::string hour = date.substr(0, 2);
+    std::string minute = date.substr(3, 2);
 
     std::string day = date.substr(6, 2);
     std::string month = date.substr(9, 2);

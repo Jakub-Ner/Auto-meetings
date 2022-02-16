@@ -11,7 +11,6 @@ std::string RECORD_SETTING = "11";
 bool SLEEP_SETTING = false;
 
 int main(int argc, char *argv[]) {
-    JSON().generate_names();
 #ifdef test_mode
     test();
 #else
