@@ -1,17 +1,6 @@
 # ninja log v5
-1	413	1644876587769704500	CMakeFiles/automation_of_studies.dir/meetings.cpp.o	7a84ae4ab843c9b0
-463	601	1644876587956332500	automation_of_studies	82ba424a9b36bef
+2	473	1645015116468077700	CMakeFiles/automation_of_studies.dir/meetings.cpp.o	7a84ae4ab843c9b0
+534	628	1645015116622516100	automation_of_studies	82ba424a9b36bef
 1	50	1644496781607534700	CMakeFiles/automation_of_studies.dir/main.cpp.o	62722ac2cf474564
-1	55	1644877448185413200	build.ninja	c2ed3708ce5c1c1a
-1	462	1644876587819358700	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
-1	392	1644878151250242900	CMakeFiles/automation_of_studies.dir/meetings.cpp.o	7a84ae4ab843c9b0
-2	468	1644878151325537700	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
-1	368	1644878203093120000	CMakeFiles/automation_of_studies.dir/meetings.cpp.o	7a84ae4ab843c9b0
-1	424	1644878203149247900	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
-1	410	1644878262124836000	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
-411	499	1644878262212930600	automation_of_studies	82ba424a9b36bef
-1	363	1644878927160547100	CMakeFiles/automation_of_studies.dir/meetings.cpp.o	7a84ae4ab843c9b0
-363	456	1644878927252877600	automation_of_studies	82ba424a9b36bef
-2	465	1645014642093633500	CMakeFiles/automation_of_studies.dir/meetings.cpp.o	7a84ae4ab843c9b0
-11	496	1645014642124286300	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a
-496	596	1645014642224425800	automation_of_studies	82ba424a9b36bef
+1	55	1645015341925551300	build.ninja	c2ed3708ce5c1c1a
+2	534	1645015116528939700	CMakeFiles/automation_of_studies.dir/options.cpp.o	bff82a9f40be234a

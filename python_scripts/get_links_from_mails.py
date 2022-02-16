@@ -19,7 +19,8 @@ class Mail:
         data = self.mail.search(None, 'FROM', FROM)
         ids = data[1][0].split()
         ids.reverse()
-        message = ""; link= ""
+        message = "";
+        link = ""
         for i in ids:
             data = self.mail.fetch(str(int(i)), '(RFC822)')
             state, response_part = data
@@ -28,36 +29,32 @@ class Mail:
             if link:
                 break
         return link, date
-                    
+
     def find_data(self, message):
         words = message.split()
         for i, word in enumerate(words):
             if "terminie" in word:
-                date = [words[i+j] for j in range(1,5)]
-                for i in range(i+4, len(words)):
-                    if "https://pwr-edu.zoom" in words[i]: # <- to repair
+                date = [words[i + j] for j in range(1, 5)]
+                for i in range(i + 4, len(words)):
+                    if "https://pwr-edu.zoom" in words[i]:  # <- to repair
                         return words[i], date
         return "", []
-    
+
     def end(self):
         self.mail.close()
         self.mail.logout()
-                
 
 
-lectures = LECTURES       
+lectures = LECTURES
 
-M =Mail()
+M = Mail()
 for mail in lectures:
-    if("@" in mail):
+    if ("@" in mail):
         url, date = M.read_mails(mail)
-        lectures[mail]["link"]=url
-        lectures[mail]["date"]=date
+        lectures[mail]["link"] = url
+        lectures[mail]["date"] = date
 
 M.end()
 
 with open("lectures.json", "w") as data:
     json.dump(lectures, data, indent=2)
-
-
-

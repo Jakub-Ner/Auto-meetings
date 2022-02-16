@@ -117,7 +117,8 @@
 			"sourceIndexes" : 
 			[
 				2,
-				5
+				5,
+				6
 			]
 		}
 	],
@@ -153,6 +154,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "options.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test_mode.h",
 			"sourceGroupIndex" : 2
 		}
 	],

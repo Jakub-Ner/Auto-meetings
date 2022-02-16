@@ -3,6 +3,8 @@
 #include <fstream>
 #include <stdlib.h>
 #include "options.h"
+#include "test_mode.h"
+
 
 void help() {
     std::cout << R"(Welcome in Auto-meetings!
@@ -16,10 +18,12 @@ OPTIONS
 }
 
 void add_meeting(const std::string &link, std::string date) {
-    while(!validate(date)){
-        std::cout<<"incorrect format of the date. Should be: hh-mm DD-MM-YYYY\n for example \"12:58 27-01-2023\"\n";
-        std::cin>>date;
+    while (!validate(date)) {
+        std::cout << "incorrect format of the date. Should be: hh-mm DD-MM-YYYY\n for example \"12:58 27-01-2023\"\n";
+        std::cin >> date;
     }
+#ifdef test_mode
+#else
     std::cout << "Do you want to try if link works?[y/n] ";
     std::string input;
     std::cin >> input;
@@ -27,13 +31,16 @@ void add_meeting(const std::string &link, std::string date) {
         std::string command = "xdg-open " + link;
         system(command.c_str());
     }
+#endif
     save_meeting(link, date);
 }
-bool save_meeting(const std::string &link, const std::string &date){
+
+bool save_meeting(const std::string &link, const std::string &date) {
 
 }
+
 bool validate(const std::string &date) {
-    if(date.size() != 16) return false; // "hh:mm DD-MM-YYYY".size() = 16
+    if (date.size() != 16) return false; // "hh:mm DD-MM-YYYY".size() = 16
 
     std::string minute = date.substr(0, 2);
     std::string hour = date.substr(3, 2);

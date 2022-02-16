@@ -10,4 +10,5 @@ add_executable(automation_of_studies
         meetings.cpp meetings.h
         get_links.sh
         options.cpp options.h
+        test_mode.h
         )
