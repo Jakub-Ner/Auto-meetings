@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <iostream>
 #include <cstring>
-#include <fstream>
 #include "options.h"
 #include "main.h"
 #include "variables/test_mode.h"
@@ -14,11 +13,11 @@ int main(int argc, char *argv[]) {
 #ifdef test_mode
     test();
 #else
-    check_json_correctness()
+//    JSON().check_json_correctness();
     if(argc > 1 ){
         choose_option(argc, argv);
     }
-//    system("./get_links.sh");
+    system("./get_links.sh"); // for now it is default
 //    system("obs-studio --startrecording");
     return 0;
 #endif //test_mode
@@ -35,6 +34,6 @@ void choose_option(int argc, char *argv[]) {
 }
 
 void test() {
-    add_meeting("https://pwr-edu.zoom.us/j/95359922014?pwd=S0Z2c0w3L0pZSTVtNzJqZTJFQkIrQT09", "12:35 16-02-2022");
+//    add_meeting("https://pwr-edu.zoom.us/j/95359922014?pwd=S0Z2c0w3L0pZSTVtNzJqZTJFQkIrQT09", "12:35 16-02-2022");
 }
 

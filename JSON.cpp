@@ -63,17 +63,20 @@ void JSON::save_meeting(const std::string &link, const std::string &date) {
 void JSON::convert_data_to_json() {
     get_name();
     std::cout << _name;
-    _content += "\n\"" + _name + "\": {\n"
+    _content += "\n  \"" + _name + "\": {\n"
                 + "     \"date\": [\n"
-                +"          \"" + _date.substr(6, 2) + "\",\n"   // day
-                +"          \"" + _date.substr(9, 2) + "\",\n"   // month
-                +"          \"" + _date.substr(12, 4) +"\",\n"   // year
-                +"          \"" + _date.substr(0, 2) + "\",\n"   // hour
-                +"          \"" + _date.substr(3, 2) + "\"\n"    // minute
+                +"          " + number(_date.substr(6, 2)) + ",\n"   // day
+                +"          " + number(_date.substr(9, 2)) + ",\n"   // month
+                +"          " + _date.substr(12, 4) +",\n"                // year
+                +"          \"" + _date.substr(0, 2) + ":"+ _date.substr(3, 2) + "\"\n" // hour:minute
                 +"          " + "],\n"
                 +"      \"link\": \"" + _link + "\"\n"
                 +"  }\n"
                 +"}";
+}
+std::string JSON::number(std::string &&date){
+    if(date[0] == '0') return date.substr(1,1);
+    return date;
 }
 
 void JSON::get_name() {

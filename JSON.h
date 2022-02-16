@@ -22,6 +22,7 @@ public:
     void save_meeting(const std::string &link, const std::string &date);
 
 private:
+    std::string number(std::string &&date);
 
     void get_name();
 

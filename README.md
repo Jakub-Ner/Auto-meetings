@@ -5,6 +5,8 @@
 - Searches on my mailbox for mails from my university profesors.
 - Looks for links to Zoom Meetings.
 - Saves links and dates of meetings in JSON.
+- Saves links and dates you give as params using --add
+- 
 
 - ---------------------------------------------
 *Soon program will:*
