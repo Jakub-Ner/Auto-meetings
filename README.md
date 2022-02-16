@@ -15,3 +15,11 @@ Firstly go to automation-of-studies directory <p>
 Give set_up.sh permission: `sudo chmod +x set_up.sh` <p>
 Then You can run the program: `./meetings.exe`
 
+## Parameters
+You can run the program with parameters:
+- `--help`
+- `--add link date`
+- `--sleep`
+- `--record`
+
+run `./meetings.exe --help to see more details`
