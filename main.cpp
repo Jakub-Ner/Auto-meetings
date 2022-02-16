@@ -11,7 +11,7 @@ std::string RECORD_SETTING = "11";
 bool SLEEP_SETTING = false;
 
 int main(int argc, char *argv[]) {
-    generate_names();
+    JSON().generate_names();
 #ifdef test_mode
     test();
 #else
@@ -36,10 +36,6 @@ void choose_option(int argc, char *argv[]) {
 }
 
 void test() {
-//    add_meeting("https://pwr-edu.zoom.us/j/95359922014?pwd=S0Z2c0w3L0pZSTVtNzJqZTJFQkIrQT09", "12:35 16-02-2022");
-    std::cout<<"do it";
-    std::cout<<read_json();
-    std::cout<<"do it";
-
+    add_meeting("https://pwr-edu.zoom.us/j/95359922014?pwd=S0Z2c0w3L0pZSTVtNzJqZTJFQkIrQT09", "12:35 16-02-2022");
 }
 

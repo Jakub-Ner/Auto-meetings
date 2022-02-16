@@ -1,53 +1,111 @@
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include "JSON.h"
 
 
-bool check_json_correctness() {
-    std::string content = read_json();
+bool JSON::check_json_correctness() {
     //...
     return true;
 }
 
-void repair_json(std::string &content) {
+void JSON::repair_json() {
 
 }
 
 
-std::string read_json() {
-    std::string path = "variables/meetings.json";
+void JSON::read_json() {
     std::ifstream file;
-    file.open(path);
-    std::string content;
+    file.open(json_path);
 
     // if file exist and is not empty:
     if (file && file.peek() != std::ifstream::traits_type::eof()) {
-        std::ostringstream ss;
-        ss << file.rdbuf(); // reading data
+        _content = read_data_at_once(file);
         file.close();
-        return ss.str();
-    }
-    else {
+
+    } else {
         file.close();
         std::ofstream new_file;
-        new_file.open(path);
+        new_file.open(json_path);
 
         new_file << "{}";
         new_file.close();
-        return "{}"; // create new json
+        _content = "{}"; // create new json
     }
 }
 
-void generate_names() {
-    std::string name = "meeting";
-    std::ofstream fout;
-    fout.open("variables/names.txt");
+std::string JSON::read_data_at_once(std::ifstream &file) {
+    std::ostringstream data;
+    data << file.rdbuf(); // reading data
+    return data.str();
+}
 
-    for (int j = 0; j < 10; j++) {
+bool JSON::save_meeting(const std::string &link, const std::string &date) {
+    _link = link;
+    _date = date;
+    read_json();
+    if (_content[_content.size() - 1] != '}')
+        check_json_correctness();
+
+    // preprocess
+    _content[_content.size() - 2] = ',';
+    _content.erase(_content.end() - 1);
+
+    // now can easily add data
+    convert_data_to_json();
+
+    std::cout << _content;
+    return false;
+}
+
+void JSON::convert_data_to_json() {
+    get_name();
+    std::cout<< _name;
+    _content += "\n\"" + _name+"\": {\n"
+                             "   \"date\": [\n";
+
+}
+
+void JSON::get_name() {
+    std::ifstream file;
+    file.open(names_path);
+
+    std::string file_content = read_data_at_once(file);
+    extract_name_and_remove_from_list(file_content);
+
+    file.close();
+
+    std::ofstream new_file;
+    new_file.open(names_path);
+    new_file << file_content;
+    new_file.close();
+}
+
+void JSON::extract_name_and_remove_from_list(std::string &file_content) {
+    _name = "";
+    int counter = file_content.size() - 1;
+
+    if (counter == 0){
+        generate_names();
+    }
+
+    while (file_content[counter] != ';') { // counter >= 0 in useless
+        _name += file_content[counter];
+        counter--;
+    }
+    if(!file_content.empty())
+        file_content.erase(counter, file_content.size()-1);
+}
+
+void JSON::generate_names() {
+    std::ofstream fout;
+    fout.open(names_path);
+
+    for (int j = 9; j >= 0; j--) {
         const char id1 = j + '0';
-        for (int i = 0; i < 10; i++) {
+        for (int i = 9; i >= 0; i--) {
             const char id2 = i + '0';
-            fout << name << id1 << id2 << "\n";
+            fout << ';' << id1 << id2<<"gniteem";
         }
     }
     fout.close();

@@ -33,22 +33,7 @@ void add_meeting(const std::string &link, std::string date) {
         system(command.c_str());
     }
 #endif //test_mode
-    save_meeting(link, date);
-}
-
-bool save_meeting(const std::string &link, const std::string &date) {
-    std::string content = read_json();
-    if (content[content.size() - 1] != '}')
-        check_json_correctness();
-
-    // preprocess
-    content[content.size() - 2] = ',';
-    content.erase(content.end()-1);
-
-    // now can add data
-    content += "\n";
-    std::cout << content;
-    return false;
+    JSON().save_meeting(link, date);
 }
 
 
