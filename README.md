@@ -11,3 +11,7 @@
 - *Joins meetings, when it should.*
 
 ## Set up for Linux:
+Firstly go to automation-of-studies directory <p>
+Give set_up.sh permission: `sudo chmod +x set_up.sh` <p>
+Then You can run the program: `./meetings.exe`
+
