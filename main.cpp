@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstring>
 #include "options.h"
-#include "meetings.h"
+#include "main.h"
 #include "test_mode.h"
 
 std::string RECORD_SETTING = "11";
@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 //    system("./get_links.sh");
 //    system("obs-studio --startrecording");
     return 0;
-#endif test_mode
+#endif //test_mode
 
 }
 

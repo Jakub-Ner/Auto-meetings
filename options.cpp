@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include <sstream>
 #include "options.h"
 #include "test_mode.h"
 
@@ -31,12 +32,20 @@ void add_meeting(const std::string &link, std::string date) {
         std::string command = "xdg-open " + link;
         system(command.c_str());
     }
-#endif
+#endif //test_mode
     save_meeting(link, date);
 }
 
 bool save_meeting(const std::string &link, const std::string &date) {
-
+    std::ifstream f("meetings.json"); //taking file as inputstream
+    std::string str;
+    if (f) {
+        std::ostringstream ss;
+        ss << f.rdbuf(); // reading data
+        str = ss.str();
+    }
+    std::cout << str;
+    return false;
 }
 
 bool validate(const std::string &date) {

@@ -56,5 +56,5 @@ for mail in lectures:
 
 M.end()
 
-with open("lectures.json", "w") as data:
+with open("meetings.json", "w") as data:
     json.dump(lectures, data, indent=2)
