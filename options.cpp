@@ -10,7 +10,7 @@ This program helps dealing with remote meetings.
 
 OPTIONS
     -a, --add link date     Set new meeting. Give: link to meetings, date in format "hh:mm DD-MM-YYYY"
-    -s, --sleep             Sleep until next meeting. Then turn on the meeting. After meeting sleep again...
+    -s, --sleep             Sleep PC until next meeting. Then turn on the meeting. After meeting sleep again...
     -r, --record            Set you recording preferences
 )";
 }
