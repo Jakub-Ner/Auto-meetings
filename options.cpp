@@ -27,9 +27,11 @@ void add_meeting(const std::string &link, std::string date) {
         std::string command = "xdg-open " + link;
         system(command.c_str());
     }
+    save_meeting(link, date);
+}
+bool save_meeting(const std::string &link, const std::string &date){
 
 }
-
 bool validate(const std::string &date) {
     if(date.size() != 16) return false; // "hh:mm DD-MM-YYYY".size() = 16
 
