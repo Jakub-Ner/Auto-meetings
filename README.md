@@ -13,12 +13,13 @@
 ## Set up for Linux (Ubuntu):
 Firstly go to automation-of-studies directory <p>
 Give set_up.sh permission: `sudo chmod +x set_up.sh` <p>
+Run set_up.sh: `./set_up.sh` <p>
 Then You can run the program: `./meetings.exe` 
 
 ## Parameters
 You can run the program with parameters:
 - `--help`
-- `--add link date` - where link is the link and date is the date of the meeting
+- `--add "link" "date"` - where link is the link and date is the date of the meeting
 - `--sleep`
 - `--record`
 

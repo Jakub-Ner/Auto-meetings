@@ -9,7 +9,7 @@ void help() {
 This program helps dealing with remote meetings.
 
 OPTIONS
-    -a, --add link date     Set new meeting. Give: link to meetings, date in format "hh:mm DD-MM-YYYY"
+    -a, --add "link" "date" Set new meeting. Give: link to meetings in "", date in format: "hh:mm DD-MM-YYYY"
     -s, --sleep             Sleep PC until next meeting. Then turn on the meeting. After meeting sleep again...
     -r, --record            Set you recording preferences
 )";
@@ -17,16 +17,19 @@ OPTIONS
 
 void add_meeting(const std::string &link, std::string date) {
     while(!validate(date)){
-        std::cout<<"incorrect format of the date. Should be: hh-mm DD-MM-YYYY\n for example 12:58 27-01-2023";
+        std::cout<<"incorrect format of the date. Should be: hh-mm DD-MM-YYYY\n for example \"12:58 27-01-2023\"\n";
         std::cin>>date;
     }
-    std::cout << "Do you want to try if link works?[y/n]";
+    std::cout << "Do you want to try if link works?[y/n] ";
     std::string input;
     std::cin >> input;
     if (input == "y") {
         std::string command = "xdg-open " + link;
         system(command.c_str());
     }
+    std::cout << "go Next ";
+    std::cin>>input;
+    std::cout<<input;
 
 }
 
