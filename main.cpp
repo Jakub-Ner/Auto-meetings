@@ -15,11 +15,11 @@ int main(int argc, char *argv[]) {
 #ifdef test_mode
     test();
 #else
-//    JSON().check_json_correctness();
-    if(argc > 1 ){
-        choose_option(argc, argv);
-    }
-    system("./get_links.sh"); // for now it is default
+    //    JSON().check_json_correctness();
+        if(argc > 1 ){
+            choose_option(argc, argv);
+        }
+        system("./get_links.sh"); // for now it is default
 #endif //test_mode
     wait_for_meeting();
 //    system("obs-studio --startrecording");
@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
 
 
 }
+
 void wait_for_meeting() {
     std::ifstream fin;
     fin.open("variables/next_meeting.txt");
@@ -34,27 +35,31 @@ void wait_for_meeting() {
     // if file exist and is not empty:
     if (fin && fin.peek() != std::ifstream::traits_type::eof()) {
         std::string name;
-        fin>>name;
+        fin >> name;
 
         tm meeting_time;
-        fin>>meeting_time.tm_mday;
+        fin >> meeting_time.tm_mday;
 
-        fin>>meeting_time.tm_mon;
+        fin >> meeting_time.tm_mon;
         meeting_time.tm_mon--; // cause tm_mon is from 0-11
 
-        fin>>meeting_time.tm_year;
+        fin >> meeting_time.tm_year;
         meeting_time.tm_year -= 1900; // cause tm_year is since 1900
 
         char colon;
-        fin>>meeting_time.tm_hour;
-        fin>>colon;
+        fin >> meeting_time.tm_hour;
+        fin >> colon;
 
-        fin>>meeting_time.tm_min;
+        fin >> meeting_time.tm_min;
 
         std::string time_to_display = asctime(&meeting_time);
-    // at the end of time_to_display appear default weekday, so cut it
-        std::cout<<"\n"<<name<<" starts at: "<<time_to_display.substr(3)<<"\n";
-        time_to_wait(meeting_time);
+        // at the end of time_to_display appear default weekday, so cut it
+        std::cout << "\n" << name << " starts at: " << time_to_display.substr(3) << "\n";
+        int waiting_time = time_to_wait(meeting_time);
+        if (waiting_time < 60 * 60 * 24)
+            std::cout << "time to wait: "<<waiting_time<<'\n';
+        else
+            std::cout<< "You have not any meeting within next 24h. Have a great day!\n";
     }
 }
 
