@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include <cstring>
 #include <fstream>
 #include "options.h"
@@ -22,8 +24,26 @@ int main(int argc, char *argv[]) {
         system("./get_links.sh"); // for now it is default
 #endif //test_mode
     wait_for_meeting();
+
 //    system("obs-studio --startrecording");
     return 0;
+
+
+}
+void run_meeting(){
+    // start meeting
+    std::string command = "xdg-open " + link;
+    system(command.c_str());
+
+    // record if RECORD_SETTING is "11" or "1"
+    if (RECORD_SETTING[0] == '1')
+        system("obs-studio --startrecording");
+
+    // wait 2 hours <- to improve
+    std::this_thread::sleep_for(std::chrono::hours (2));
+
+    // finish recording
+    if (RECORD_SETTING[0] == '1')
 
 
 }
@@ -35,9 +55,10 @@ void wait_for_meeting() {
     // if file exist and is not empty:
     if (fin && fin.peek() != std::ifstream::traits_type::eof()) {
         std::string name;
+        tm meeting_time;
+
         fin >> name;
 
-        tm meeting_time;
         fin >> meeting_time.tm_mday;
 
         fin >> meeting_time.tm_mon;
@@ -52,15 +73,31 @@ void wait_for_meeting() {
 
         fin >> meeting_time.tm_min;
 
-        std::string time_to_display = asctime(&meeting_time);
-        // at the end of time_to_display appear default weekday, so cut it
-        std::cout << "\n" << name << " starts at: " << time_to_display.substr(3) << "\n";
-        int waiting_time = time_to_wait(meeting_time);
-        if (waiting_time < 60 * 60 * 24)
-            std::cout << "time to wait: "<<waiting_time<<'\n';
-        else
-            std::cout<< "You have not any meeting within next 24h. Have a great day!\n";
+        getline(fin, link);
+
+        menu(name, meeting_time);
     }
+}
+
+void menu(const std::string &name, tm& meeting_time){
+    std::string time_to_display = asctime(&meeting_time);
+
+    // at the end of time_to_display appear default weekday, so cut it
+    std::cout << "\n" << name << " starts at: " << time_to_display.substr(3) << "\n";
+
+    int waiting_time;
+    do {
+        waiting_time = time_to_wait(meeting_time);
+
+        if (waiting_time < 60 * 60 * 24) {
+            std::cout << "time to wait: " << waiting_time << '\n';
+            std::this_thread::sleep_for(std::chrono::minutes(4));
+
+        }else {
+            std::cout << "You have not any meeting within next 24h. Have a great day!\n";
+            std::this_thread::sleep_for(std::chrono::hours(1));
+        }
+    }while(waiting_time > 6*60*60); // the loop finishes 2-6 minutes before meeting
 }
 
 void choose_option(int argc, char *argv[]) {

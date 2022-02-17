@@ -1,19 +1,20 @@
 # Auto-Meetings
 
-**Now program:**
+**What makes it useful:**
 
-- Searches on my mailbox for mails from my university profesors.
-- Looks for links to Zoom Meetings.
+- Searches on mailbox for mails with information about meetings.
 - Saves links and dates of meetings in JSON.
 - Saves links and dates you give as params using --add
-- 
+- looks for the closest meeting
+- joins meeting when it should and if user agreed, starts recording
+- runs in the background
+- can hibernate till next meeting, then hibernate till...
+
 
 - ---------------------------------------------
 *Soon program will:*
 
 - *Starts itself after PC turn on.*
-- *Runs in the background.*
-- *Joins meetings, when it should.*
 
 ## Set up for Linux (Ubuntu):
 
@@ -21,6 +22,21 @@ Firstly go to automation-of-studies directory <p>
 Give set_up.sh permission: `sudo chmod +x set_up.sh` <p>
 Run set_up.sh: `./set_up.sh` <p>
 Then You can run the program: `./meetings.exe`
+
+-----------------------------------
+
+## Set up for obs-studio
+
+### Tool for finishing recordins
+obs-studio -> Tools -> Output timer -> <p>
+- ***Stop recording after*** `2` ***hours*** <p>
+- - [x] ***Enable recording timer every time***
+
+### Set mkv in case program crushing during recording
+obs-studio -> File -> Settings -> Output -> <p>
+- ***Recording Format*** `mkv`
+
+-------------------------------------------------
 
 ## Parameters
 

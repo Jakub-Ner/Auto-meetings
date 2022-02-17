@@ -17,7 +17,6 @@ int time_to_wait(const tm &meeting_time) {
         return 60 * 60 * 24;
 
     return 60 * (diff.tm_min + 60 * (diff.tm_hour + 24 * (diff.tm_mday)));
-
 }
 
 int how_many_days(int year, int month) {
