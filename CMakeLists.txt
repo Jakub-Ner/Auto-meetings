@@ -12,4 +12,5 @@ add_executable(automation_of_studies
         options.cpp options.h
         variables/test_mode.h
         JSON.cpp JSON.h
+        my_time.cpp my_time.h
         )

@@ -93,6 +93,13 @@ build CMakeFiles/automation_of_studies.dir/JSON.cpp.o: CXX_COMPILER__automation_
   OBJECT_DIR = CMakeFiles/automation_of_studies.dir
   OBJECT_FILE_DIR = CMakeFiles/automation_of_studies.dir
 
+build CMakeFiles/automation_of_studies.dir/my_time.cpp.o: CXX_COMPILER__automation_of_studies_Debug /media/jakubner/ADATA$ SD700/work/programming/automation-of-studies/my_time.cpp || cmake_object_order_depends_target_automation_of_studies
+  DEP_FILE = CMakeFiles/automation_of_studies.dir/my_time.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -I"/media/jakubner/ADATA SD700/work/programming/automation-of-studies/."
+  OBJECT_DIR = CMakeFiles/automation_of_studies.dir
+  OBJECT_FILE_DIR = CMakeFiles/automation_of_studies.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target automation_of_studies
@@ -101,7 +108,7 @@ build CMakeFiles/automation_of_studies.dir/JSON.cpp.o: CXX_COMPILER__automation_
 #############################################
 # Link the executable automation_of_studies
 
-build automation_of_studies: CXX_EXECUTABLE_LINKER__automation_of_studies_Debug CMakeFiles/automation_of_studies.dir/main.cpp.o CMakeFiles/automation_of_studies.dir/options.cpp.o CMakeFiles/automation_of_studies.dir/JSON.cpp.o
+build automation_of_studies: CXX_EXECUTABLE_LINKER__automation_of_studies_Debug CMakeFiles/automation_of_studies.dir/main.cpp.o CMakeFiles/automation_of_studies.dir/options.cpp.o CMakeFiles/automation_of_studies.dir/JSON.cpp.o CMakeFiles/automation_of_studies.dir/my_time.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/automation_of_studies.dir
   POST_BUILD = :
