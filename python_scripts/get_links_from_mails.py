@@ -4,7 +4,7 @@ import json
 import os
 
 from TOP_SECRET import PASS, MY_MAIL
-from manage_dates import convert_months_to_numbers
+from manage_dates import convert_months_to_numbers, prepare_next_meeting
 
 
 class Mail:
@@ -56,16 +56,16 @@ class Mail:
 
 
 with open("variables/meetings.json", "r") as data:
-    lectures = json.load(data)
+    meetings = json.load(data)
 try:
     M = Mail()
 
-    for mail in lectures:
+    for mail in meetings:
         if ("@" in mail):
             url, date = M.read_mails(mail)
-            lectures[mail]["link"] = url
+            meetings[mail]["link"] = url
             date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
-            lectures[mail]["date"] = date
+            meetings[mail]["date"] = date
 
         # new mails will be added to the beginning of the list,
         # disposable links are added at the end, so If we meet one, we can finish the loop
@@ -76,5 +76,7 @@ try:
 except:
     os.system('echo "ERROR: Lack of internet connection!"')
 
+prepare_next_meeting(meetings)
+
 with open("variables/meetings.json", "w") as data:
-    json.dump(lectures, data, indent=2)
+    json.dump(meetings, data, indent=2)

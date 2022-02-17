@@ -12,12 +12,13 @@ bool SLEEP_SETTING = false;
 int main(int argc, char *argv[]) {
 #ifdef test_mode
     test();
-#else
+//#else
 //    JSON().check_json_correctness();
     if(argc > 1 ){
         choose_option(argc, argv);
     }
     system("./get_links.sh"); // for now it is default
+
 //    system("obs-studio --startrecording");
     return 0;
 #endif //test_mode
