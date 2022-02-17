@@ -32,7 +32,8 @@ obs-studio -> Tools -> Output timer -> <p>
 - ***Stop recording after*** `2` ***hours*** <p>
 - - [x] ***Enable recording timer every time***
 
-### Set mkv in case program crushing during recording
+### Set mkv 
+*in case program crushing during recording*<p>
 obs-studio -> File -> Settings -> Output -> <p>
 - ***Recording Format*** `mkv`
 
@@ -42,9 +43,9 @@ obs-studio -> File -> Settings -> Output -> <p>
 
 You can run the program with parameters:
 
-- `--help`
-- `--add "link" "date"` - where link is the link and date is the date of the meeting
-- `--sleep`
-- `--record`
+- `-h` or `--help` 
+- `-a` or `--add "link" "date"` - where link is the link and date is the date of the meeting
+- `-s` or `--sleep`
+- `-r` or `--record`
 
 run `./meetings.exe --help to see more details`

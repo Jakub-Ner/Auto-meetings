@@ -1,5 +1,4 @@
 #include "my_time.h"
-#include <iostream>
 
 int time_to_wait(const tm &meeting_time) {
     std::time_t now_in_sec = time(0); // gives actual epoch time since 1970
@@ -13,7 +12,7 @@ int time_to_wait(const tm &meeting_time) {
     diff.tm_hour = meeting_time.tm_hour - now->tm_hour;
     diff.tm_min = meeting_time.tm_min - now->tm_min;
 
-    if (abs(diff.tm_mday) > 1)
+    if (diff.tm_mday > 1)
         return 60 * 60 * 24;
 
     return 60 * (diff.tm_min + 60 * (diff.tm_hour + 24 * (diff.tm_mday)));

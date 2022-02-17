@@ -1,6 +1,6 @@
 #ifndef AUTOMATION_OF_STUDIES_TEST_MODE_H
 #define AUTOMATION_OF_STUDIES_TEST_MODE_H
 
-#define test_mode
+//#define test_mode
 
 #endif //AUTOMATION_OF_STUDIES_TEST_MODE_H

@@ -57,16 +57,12 @@ bool validate(const std::string &date) {
     return true;
 }
 
-bool sleep(int time_to_sleep) {
-//        system("sudo rtcwake -u -s time_to_sleep -m mem"); <- have to figure out the other way
-    return false;
-}
 
 void record() {
     std::string n;
 
     std::ofstream fout;
-    fout.open("RECORD_SETTING.txt");
+    fout.open("variables/RECORD_SETTING.txt");
 
     std::cout << R"(
 11 - if you want to set meetings recording as default.
@@ -78,12 +74,15 @@ void record() {
     if (n == "11") {
         std::cout << "You have set meetings recording as default.\n";
         fout << "11";
+
     } else if (n == "00") {
         std::cout << "You have disabled meetings recording as default";
         fout << "00";
+
     } else if (n == "1") {
         std::cout << "You will record your next meeting";
         fout << "1";
+
     } else std::cout << "Incorrect input! You could not set your recording preferences.";
     fout.close();
 }
