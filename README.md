@@ -40,8 +40,7 @@ obs-studio -> File -> Settings -> Output -> <p>
 ## set Source
 - turn off an eye icon next to Screen Capture
 - turn on an eye icon next to your meeting app for example Zoom <p>
- *if you do not see Sources go to: <p>
- view -> Docks -> Sources
+ *if you do not see Sources go to: *view -> Docks -> Sources*
 -------------------------------------------------
 
 ## Parameters
