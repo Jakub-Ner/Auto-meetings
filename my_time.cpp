@@ -1,8 +1,9 @@
+#include <iostream>
 #include "my_time.h"
 
 int time_to_wait(const tm &meeting_time) {
     std::time_t now_in_sec = time(0); // gives actual epoch time since 1970
-    tm *now = gmtime(&now_in_sec);
+    tm *now = localtime(&now_in_sec);
 
     tm diff{};
 

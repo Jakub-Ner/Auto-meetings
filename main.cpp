@@ -29,7 +29,9 @@ int main(int argc, char *argv[]) {
         load_settings();
 #endif //test_mode
         wait_for_meeting();
-        run_meeting();
+        if (name != "@") {
+            run_meeting();
+        }
     }
 }
 
@@ -48,7 +50,10 @@ void load_settings() {
 void run_meeting() {
     // start meeting
     std::string command = "xdg-open " + link;
+    std::cout<<command<<"\n";
     system(command.c_str());
+    std::this_thread::sleep_for(std::chrono::seconds (10));
+
 
     // record if RECORD_SETTING is "11" or "1"
     if (RECORD_SETTING[0] == '1')
@@ -66,29 +71,33 @@ void wait_for_meeting() {
 
     // if file exist and is not empty:
     if (fin && fin.peek() != std::ifstream::traits_type::eof()) {
-        std::string name;
         tm meeting_time;
 
         fin >> name;
+        // name == "@" means that arent any meeting on the list
+        if (name == "@") {
+            std::cout << "You have not any meeting within next 24h. Have a great day!\n";
+            std::this_thread::sleep_for(std::chrono::hours(1));
+        }
+        else{
+            fin >> meeting_time.tm_mday;
 
-        fin >> meeting_time.tm_mday;
+            fin >> meeting_time.tm_mon;
+            meeting_time.tm_mon--; // cause tm_mon is from 0-11
 
-        fin >> meeting_time.tm_mon;
-        meeting_time.tm_mon--; // cause tm_mon is from 0-11
+            fin >> meeting_time.tm_year;
+            meeting_time.tm_year -= 1900; // cause tm_year is since 1900
 
-        fin >> meeting_time.tm_year;
-        meeting_time.tm_year -= 1900; // cause tm_year is since 1900
+            char colon;
+            fin >> meeting_time.tm_hour;
+            fin >> colon;
 
-        char colon;
-        fin >> meeting_time.tm_hour;
-        fin >> colon;
+            fin >> meeting_time.tm_min;
+            fin >> link;
+            fin.close();
 
-        fin >> meeting_time.tm_min;
-
-        getline(fin, link);
-        fin.close();
-
-        menu(name, meeting_time);
+            menu(name, meeting_time);
+        }
     }
 }
 
@@ -96,7 +105,7 @@ void menu(const std::string &name, tm &meeting_time) {
     std::string time_to_display = asctime(&meeting_time);
 
     // at the end of time_to_display appear default weekday, so cut it
-    std::cout << "\n" << name << " starts at: " << time_to_display.substr(3) << "eeee\n";
+    std::cout << "\n" << name << " starts at: " << time_to_display.substr(3, 13) << "\n";
 
     int waiting_time = time_to_wait(meeting_time); // in seconds
 
@@ -109,7 +118,8 @@ void menu(const std::string &name, tm &meeting_time) {
 
         command = "sudo rtcwake -u -s " + command + " -m mem";
 
-        std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << waiting_time - 60 / 60 << " minutes" << '\n';
+        std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << (waiting_time - 60) / 60
+                  << " minutes" << '\n';
         std::this_thread::sleep_for(std::chrono::minutes(1));
         system(command.c_str());
 
@@ -132,25 +142,25 @@ void menu(const std::string &name, tm &meeting_time) {
     }
 }
 
-    void choose_option(int argc, char *argv[]) {
-        if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) help();
+void choose_option(int argc, char *argv[]) {
+    if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) help();
 
-        else if (strcmp(argv[1], "--sleep") == 0 || strcmp(argv[1], "-s") == 0) {
-            std::cout << "sleeping is setted to true\n";
-            SLEEP_SETTING = true;
+    else if (strcmp(argv[1], "--sleep") == 0 || strcmp(argv[1], "-s") == 0) {
+        std::cout << "sleeping is setted to true\n";
+        SLEEP_SETTING = true;
 
-        } else if (strcmp(argv[1], "--record") == 0 || strcmp(argv[1], "-r") == 0) record();
+    } else if (strcmp(argv[1], "--record") == 0 || strcmp(argv[1], "-r") == 0) record();
 
-        else if (argc == 4) {
-            if (strcmp(argv[1], "--add") == 0 || strcmp(argv[1], "-a") == 0)
-                add_meeting(argv[2], argv[3]);
-            else std::cout << "Invalid parameters";
+    else if (argc == 4) {
+        if (strcmp(argv[1], "--add") == 0 || strcmp(argv[1], "-a") == 0)
+            add_meeting(argv[2], argv[3]);
+        else std::cout << "Invalid parameters";
 
-        } else std::cout << "Invalid parameters";
+    } else std::cout << "Invalid parameters";
 
-    }
+}
 
-    void test() {
+void test() {
 //    add_meeting("https://pwr-edu.zoom.us/j/95359922014?pwd=S0Z2c0w3L0pZSTVtNzJqZTJFQkIrQT09", "12:35 16-02-2022");
-    }
+}
 

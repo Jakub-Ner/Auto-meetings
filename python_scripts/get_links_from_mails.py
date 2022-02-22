@@ -36,7 +36,7 @@ class Mail:
     def find_data(self, message):
         words = message.split()
         for i, word in enumerate(words):
-            if "terminie" in word:
+            if "termin" in word:
 
                 date = []
                 for j in range(1, 5):
@@ -55,28 +55,31 @@ class Mail:
         self.mail.logout()
 
 
-with open("variables/meetings.json", "r") as data:
-    meetings = json.load(data)
-try:
-    M = Mail()
+if __name__ == "__main__":
 
-    for mail in meetings:
-        if ("@" in mail):
-            url, date = M.read_mails(mail)
-            meetings[mail]["link"] = url
-            date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
-            meetings[mail]["date"] = date
+    with open("variables/meetings.json", "r") as data:
+        meetings = json.load(data)
+    try:
+        M = Mail()
 
-        # new mails will be added to the beginning of the list,
-        # disposable links are added at the end, so If we meet one, we can finish the loop
-        else:
-            break
+        for mail in meetings:
+            if len(mail) > 1:
+                if ("@" in mail):
+                    url, date = M.read_mails(mail)
+                    meetings[mail]["link"] = url
+                    date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
+                    meetings[mail]["date"] = date
 
-    M.end()
-except:
-    os.system('echo "ERROR: Lack of internet connection!"')
+                # new mails will be added to the beginning of the list,
+                # disposable links are added at the end, so If we meet one, we can finish the loop
+                else:
+                    break
 
-prepare_next_meeting(meetings)
+        M.end()
+    except:
+        os.system('echo "ERROR: Lack of internet connection!"')
 
-with open("variables/meetings.json", "w") as data:
-    json.dump(meetings, data, indent=2)
+    prepare_next_meeting(meetings)
+
+    with open("variables/meetings.json", "w") as data:
+        json.dump(meetings, data, indent=2)

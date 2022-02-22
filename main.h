@@ -2,6 +2,7 @@
 #define AUTOMATION_OF_STUDIES_MAIN_H
 
 std::string link;
+std::string name;
 
 void wait_for_meeting();
 void load_settings();

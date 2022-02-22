@@ -37,6 +37,12 @@ obs-studio -> Tools -> Output timer -> <p>
 obs-studio -> File -> Settings -> Output -> <p>
 - ***Recording Format*** `mkv`
 
+## set Source
+- turn off an eye icon next to Screen Capture
+- turn on an eye icon next to your meeting app for example Zoom
+
+ ***if you do not see Sources go to:**
+ view -> Docks -> Sources
 -------------------------------------------------
 
 ## Parameters
@@ -45,7 +51,15 @@ You can run the program with parameters:
 
 - `-h` or `--help` 
 - `-a` or `--add "link" "date"` - where link is the link and date is the date of the meeting
-- `-s` or `--sleep`
+- `-s` or `--sleep` - it is recommended to run with sudo
 - `-r` or `--record`
 
-run `./meetings.exe --help to see more details`
+***examples:*** <p>
+`./meetings.exe --help`  <p>
+`sudo ./meetings.exe -s`
+
+## Disclaimer
+
+- Internet connection is needed
+- if you want program to search for mails with meetings, you should have installed `Python3`
+- PC in hibernated mode uses energy

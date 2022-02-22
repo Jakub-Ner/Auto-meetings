@@ -32,45 +32,79 @@ def prepare_next_meeting(meetings):
 
 def __save_next_meeting__(meeting, name):
     with open('variables/next_meeting.txt', 'w') as fin:
-
         fin.write(name)
         fin.write("\n")
 
         for date_part in meeting["date"]:
-            fin.write(str(date_part))
             fin.write(" ")
+            fin.write(str(date_part))
         fin.write("\n")
 
         fin.write(meeting["link"])
 
 
+def __check_if_meeting_isnt_old(date):
+    import time
+    now = time.localtime()
+
+    # year
+    if date[2] < now.tm_year:
+        return False
+    # month
+    if date[1] < now.tm_mon:
+        return False
+    # day
+    if date[0] < now.tm_mday:
+        return False
+
+    # hour, I let being late 1 hour
+    if int(date[3][0:2]) + 1 < now.tm_hour:
+        return False
+
+    return True
+
+
 def __find_next_meeting__(meetings):
-    next_meeting_name = list(meetings.keys())[0]
+    next_meeting_name = "@"  # <- empty meeting
+    trash = []
 
     for meeting in meetings:
-        # comparing year of meeting
-        if meetings[meeting]["date"][2] < meetings[next_meeting_name]["date"][2]:
-            next_meeting_name = meeting
-            continue
 
-        # comparing month of meeting
-        if meetings[meeting]["date"][1] < meetings[next_meeting_name]["date"][1]:
-            next_meeting_name = meeting
-            continue
+        if (meetings[meeting]["date"] == []) or \
+                (meeting != '@') and (not __check_if_meeting_isnt_old(meetings[meeting]["date"])):
+            trash.append(meeting)
 
-        # comparing day of meeting
-        if meetings[meeting]["date"][0] < meetings[next_meeting_name]["date"][0]:
-            next_meeting_name = meeting
-            continue
+        else:
+            # comparing year of meeting
+            if meetings[meeting]["date"][2] < meetings[next_meeting_name]["date"][2]:
+                next_meeting_name = meeting
+                continue
 
-        # meeting["date"][3] = "hh:mm", so:
-        # comparing hour of meeting
-        if meetings[meeting]["date"][3][0:2] < meetings[next_meeting_name]["date"][3][0:2]:
-            next_meeting_name = meeting
-            continue
+            # comparing month of meeting
+            if meetings[meeting]["date"][1] < meetings[next_meeting_name]["date"][1]:
+                next_meeting_name = meeting
+                continue
 
-        # comparing minute of meeting
-        if meetings[meeting]["date"][3][3:5] < meetings[next_meeting_name]["date"][3][3:5]:
-            next_meeting_name = meeting
+            # comparing day of meeting
+            if meetings[meeting]["date"][0] < meetings[next_meeting_name]["date"][0]:
+                next_meeting_name = meeting
+                continue
+
+            # meeting["date"][3] = "hh:mm", so:
+            # comparing hour of meeting
+            if meetings[meeting]["date"][3][0:2] < meetings[next_meeting_name]["date"][3][0:2]:
+                next_meeting_name = meeting
+                continue
+
+            # comparing minute of meeting
+            if meetings[meeting]["date"][3][3:5] < meetings[next_meeting_name]["date"][3][3:5]:
+                next_meeting_name = meeting
+
+    # delete all old meetings from the list
+    for t in trash:
+        if '@' in t and len(t) > 1:
+            meetings[t]["date"] = []
+        else:
+            meetings.pop(t)
 
     return next_meeting_name
