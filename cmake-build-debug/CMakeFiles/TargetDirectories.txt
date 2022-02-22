@@ -1,3 +1,0 @@
-/media/jakubner/ADATA SD700/work/programming/automation-of-studies/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/media/jakubner/ADATA SD700/work/programming/automation-of-studies/cmake-build-debug/CMakeFiles/edit_cache.dir
-/media/jakubner/ADATA SD700/work/programming/automation-of-studies/cmake-build-debug/CMakeFiles/automation_of_studies.dir

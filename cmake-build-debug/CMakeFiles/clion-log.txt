@@ -1,4 +1,0 @@
-/snap/clion/180/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/180/bin/ninja/linux/ninja -G Ninja "/media/jakubner/ADATA SD700/work/programming/automation-of-studies"
--- Configuring done
--- Generating done
--- Build files have been written to: /media/jakubner/ADATA SD700/work/programming/automation-of-studies/cmake-build-debug

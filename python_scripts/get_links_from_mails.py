@@ -45,6 +45,7 @@ class Mail:
                     else:
                         date.append(words[i + j])  # month and hh:mm
 
+                # below i doesnt make sense
                 for i in range(i + 4, len(words)):
                     if "https://pwr-edu.zoom" in words[i]:  # <- to repair
                         return words[i], date
@@ -57,6 +58,8 @@ class Mail:
 
 if __name__ == "__main__":
 
+    # if you want to run only python scripts change path to
+    # "../variables/meetings.json"
     with open("variables/meetings.json", "r") as data:
         meetings = json.load(data)
     try:
@@ -64,7 +67,7 @@ if __name__ == "__main__":
 
         for mail in meetings:
             if len(mail) > 1:
-                if ("@" in mail):
+                if "@" in mail:
                     url, date = M.read_mails(mail)
                     meetings[mail]["link"] = url
                     date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
@@ -81,5 +84,7 @@ if __name__ == "__main__":
 
     prepare_next_meeting(meetings)
 
+    # if you want to run only python scripts change path to
+    # "../variables/meetings.json"
     with open("variables/meetings.json", "w") as data:
         json.dump(meetings, data, indent=2)
