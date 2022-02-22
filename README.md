@@ -61,6 +61,5 @@ You can run the program with parameters:
 ## Disclaimer
 
 - Internet connection is needed
-
-[//]: # (- if you want program to search for mails with meetings, you should have installed `Python3`)
+- if you want program to search for mails with meetings, you should have installed `Python3`
 - PC in hibernated mode uses energy
