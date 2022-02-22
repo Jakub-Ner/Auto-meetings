@@ -7,10 +7,12 @@ include_directories(./)
 
 add_executable(automation_of_studies
         python_scripts/get_links_from_mails.py
-        main.cpp main.h
+        main_funtionalities/main.cpp main_funtionalities/main.h
         get_links.sh
-        options.cpp options.h
-        variables/test_mode.h
-        JSON.cpp JSON.h
-        my_time.cpp my_time.h
+        main_funtionalities/options.cpp main_funtionalities/options.h
+        variables/GLOBAL
+        main_funtionalities/JSON.cpp main_funtionalities/JSON.h
+        main_funtionalities/my_time.cpp main_funtionalities/my_time.h
+        variables/operating_systems/MacOS.h
+        variables/operating_systems/Windows.h
         )

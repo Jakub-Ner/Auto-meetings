@@ -103,7 +103,8 @@
 			"sourceIndexes" : 
 			[
 				0,
-				3
+				3,
+				6
 			]
 		},
 		{
@@ -122,9 +123,10 @@
 			[
 				2,
 				5,
-				6,
 				8,
-				10
+				10,
+				11,
+				12
 			]
 		}
 	],
@@ -138,12 +140,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "main.cpp",
+			"path" : "main_funtionalities/main.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "main.h",
+			"path" : "main_funtionalities/main.h",
 			"sourceGroupIndex" : 2
 		},
 		{
@@ -154,39 +156,49 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "options.cpp",
+			"path" : "main_funtionalities/options.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "options.h",
+			"path" : "main_funtionalities/options.h",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 1,
-			"path" : "variables/test_mode.h",
+			"path" : "variables/GLOBAL",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "main_funtionalities/JSON.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "main_funtionalities/JSON.h",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "JSON.cpp",
+			"path" : "main_funtionalities/my_time.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 1,
-			"path" : "JSON.h",
+			"path" : "main_funtionalities/my_time.h",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 1,
-			"compileGroupIndex" : 0,
-			"path" : "my_time.cpp",
-			"sourceGroupIndex" : 1
+			"path" : "variables/operating_systems/MacOS.h",
+			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 1,
-			"path" : "my_time.h",
+			"path" : "variables/operating_systems/Windows.h",
 			"sourceGroupIndex" : 2
 		}
 	],

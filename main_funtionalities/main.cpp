@@ -5,9 +5,10 @@
 #include <cstring>
 #include <fstream>
 #include <sstream>
-#include "options.h"
+
+#include "../variables/GLOBAL"
 #include "main.h"
-#include "variables/test_mode.h"
+#include "options.h"
 #include "JSON.h"
 #include "my_time.h"
 
@@ -25,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     // use CTRL+C to stop the program
     while (true) {
-        system("./get_links.sh"); // for now it is default
+        system(get_meetings_from_mails.c_str()); // for now it is default
         load_settings();
 #endif //test_mode
         wait_for_meeting();
@@ -49,7 +50,7 @@ void load_settings() {
 
 void run_meeting() {
     // start meeting
-    std::string command = "xdg-open " + link;
+    std::string command = open_page + link;
     std::cout<<command<<"\n";
     system(command.c_str());
     std::this_thread::sleep_for(std::chrono::seconds (10));
@@ -57,7 +58,7 @@ void run_meeting() {
 
     // record if RECORD_SETTING is "11" or "1"
     if (RECORD_SETTING[0] == '1')
-        system("obs-studio --startrecording");
+        system(open_obs.c_str());
 
     // wait 2 hours <- to improve
     std::this_thread::sleep_for(std::chrono::hours(2));
@@ -116,7 +117,7 @@ void menu(const std::string &name, tm &meeting_time) {
         std::string command;
         ss >> command;
 
-        command = "sudo rtcwake -u -s " + command + " -m mem";
+        command = start_sleep[0] + command + start_sleep[1];
 
         std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << (waiting_time - 60) / 60
                   << " minutes" << '\n';

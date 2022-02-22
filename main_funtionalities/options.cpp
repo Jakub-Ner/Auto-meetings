@@ -3,7 +3,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include "options.h"
-#include "variables/test_mode.h"
+#include "../variables/GLOBAL"
 #include "JSON.h"
 
 
@@ -29,7 +29,7 @@ void add_meeting(const std::string &link, std::string date) {
     std::string input;
     std::cin >> input;
     if (input == "y") {
-        std::string command = "xdg-open " + link;
+        std::string command = open_page + link;
         system(command.c_str());
     }
 #endif //test_mode

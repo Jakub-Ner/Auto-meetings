@@ -1,0 +1,10 @@
+#ifndef AUTOMATION_OF_STUDIES_WINDOWS_H
+#define AUTOMATION_OF_STUDIES_WINDOWS_H
+#include <iostream>
+
+const std::string open_page = "";
+const std::string open_obs = "";
+const std::string get_meetings_from_mails = "";
+const std::string start_sleep[] = {"", ""};
+
+#endif //AUTOMATION_OF_STUDIES_WINDOWS_H
