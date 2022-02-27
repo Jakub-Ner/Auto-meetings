@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     # if you want to run only python scripts change path to
     # "../variables/meetings.json"
-    with open("variables/meetings.json", "r") as data:
+    with open(f"variables/meetings.json", "r") as data:
         meetings = json.load(data)
     try:
         M = Mail()
@@ -86,5 +86,5 @@ if __name__ == "__main__":
 
     # if you want to run only python scripts change path to
     # "../variables/meetings.json"
-    with open("variables/meetings.json", "w") as data:
+    with open(f"variables/meetings.json", "w") as data:
         json.dump(meetings, data, indent=2)

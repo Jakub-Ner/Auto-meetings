@@ -29,7 +29,7 @@ Then You can run the program: `./meetings.exe`
 
 ### Tool for finishing recordins
 obs-studio -> Tools -> Output timer -> <p>
-- ***Stop recording after*** `2` ***hours*** <p>
+- ***Stop recording after*** `1` ***hour `45` minutes*** <p>
 - - [x] ***Enable recording timer every time***
 
 ### Set mkv 
@@ -61,3 +61,4 @@ You can run the program with parameters:
 - Internet connection is needed
 - if you want program to search for mails with meetings, you should have installed `Python3`
 - PC in hibernated mode uses energy
+- use `CTRL+C` in terminal to stop running the program
