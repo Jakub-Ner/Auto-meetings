@@ -16,8 +16,8 @@ KEYS = list(MONTHS.keys())
 
 def convert_months_to_numbers(month):
     i = 0
-    while (i < len(KEYS)):
-        if (KEYS[i] in month):
+    while i < len(KEYS):
+        if KEYS[i] in month:
             return MONTHS[KEYS[i]]
         i += 1
 

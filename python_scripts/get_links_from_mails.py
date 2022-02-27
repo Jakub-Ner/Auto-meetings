@@ -18,12 +18,14 @@ class Mail:
         self.mail = imaplib.IMAP4_SSL(self.SMTP_SERVER)
         self.mail.login(self.MY_EMAIL, self.MY_PASS)
 
-    def read_mails(self, FROM):
-        self.mail.select('inbox')
-        data = self.mail.search(None, 'FROM', FROM)
+        self.email_from = ""
+
+    def read_mails(self, email_from):
+        self.email_from = email_from
+        data = self.mail.search(None, 'FROM', self.email_from)
         ids = data[1][0].split()
         ids.reverse()
-        message = "";
+
         link = ""
         for i in ids:
             data = self.mail.fetch(str(int(i)), '(RFC822)')
@@ -38,18 +40,22 @@ class Mail:
         words = message.split()
         for i, word in enumerate(words):
             if "termin" in word:
+                try:
+                    date = []
+                    for j in range(1, 5):
+                        if j % 2 == 1:
+                            date.append(int(words[i + j]))  # day and year
+                        else:
+                            date.append(words[i + j])  # month and hh:mm
 
-                date = []
-                for j in range(1, 5):
-                    if j % 2 == 1:
-                        date.append(int(words[i + j]))  # day and year
-                    else:
-                        date.append(words[i + j])  # month and hh:mm
+                    # this below doesn't make sense
+                    for i in range(i + 4, len(words)):
+                        if "https://pwr-edu.zoom" in words[i]:  # <- to repair
+                            return words[i], date
 
-                # below i doesnt make sense
-                for i in range(i + 4, len(words)):
-                    if "https://pwr-edu.zoom" in words[i]:  # <- to repair
-                        return words[i], date
+                except:
+                    os.system('echo "ERROR: Invalid date format in mail! from {}"'.format(self.email_from))
+
         return "", []
 
     def end(self):
@@ -82,12 +88,18 @@ if __name__ == "__main__":
 
     try:
         M = Mail()
+        M.mail.select('inbox')
+
         for mail in meetings:
             if len(mail) > 1:
                 if "@" in mail:
                     url, date = M.read_mails(mail)
                     meetings[mail]["link"] = url
-                    date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
+                    try:
+                        date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
+                    except:
+                        os.system('echo "ERROR: Invalid date format in mail!"')
+
                     meetings[mail]["date"] = date
 
                 # new mails will be added to the beginning of the list,
