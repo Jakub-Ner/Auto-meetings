@@ -95,10 +95,8 @@ if __name__ == "__main__":
                 if "@" in mail:
                     url, date = M.read_mails(mail)
                     meetings[mail]["link"] = url
-                    try:
+                    if date:
                         date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
-                    except:
-                        os.system('echo "ERROR: Invalid date format in mail!"')
 
                     meetings[mail]["date"] = date
 
