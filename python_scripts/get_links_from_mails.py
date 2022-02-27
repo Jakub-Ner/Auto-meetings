@@ -5,6 +5,7 @@ import os
 
 from TOP_SECRET import PASS, MY_MAIL
 from manage_dates import convert_months_to_numbers, prepare_next_meeting
+MEETINGS_PATH = f"variables/meetings.json"
 
 
 class Mail:
@@ -58,13 +59,29 @@ class Mail:
 
 if __name__ == "__main__":
 
-    # if you want to run only python scripts change path to
+    # if file didn't exist a+ creates it
+    with open(MEETINGS_PATH, "a+") as file:
+        # if file is empty give necessary data
+        if os.stat(MEETINGS_PATH).st_size == 0:
+            necessary_data = {
+                "@": {
+                    "date": [
+                        40,  # day
+                        13,  # month
+                        2222,  # year
+                        "25:62"  # hour:minute
+                    ],
+                    "link": ""
+                }}
+            json.dump(necessary_data, file, indent=2)
+
+    # if you want to run only python scripts change MEETINGS_PATH to
     # "../variables/meetings.json"
-    with open(f"variables/meetings.json", "r") as data:
+    with open(MEETINGS_PATH, "r") as data:
         meetings = json.load(data)
+
     try:
         M = Mail()
-
         for mail in meetings:
             if len(mail) > 1:
                 if "@" in mail:
@@ -86,5 +103,5 @@ if __name__ == "__main__":
 
     # if you want to run only python scripts change path to
     # "../variables/meetings.json"
-    with open(f"variables/meetings.json", "w") as data:
+    with open(MEETINGS_PATH, "w") as data:
         json.dump(meetings, data, indent=2)

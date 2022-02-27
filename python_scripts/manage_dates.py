@@ -50,20 +50,27 @@ def __check_if_meeting_isnt_old(date):
     now = time.localtime()
 
     # year
-    if date[2] < now.tm_year:
+    if date[2] > now.tm_year:
+        return True
+    elif date[2] < now.tm_year:
         return False
+
     # month
-    if date[1] < now.tm_mon:
+    if date[1] > now.tm_mon:
+        return True
+    elif date[1] < now.tm_mon:
         return False
+
     # day
-    if date[0] < now.tm_mday:
+    if date[0] > now.tm_mday:
+        return True
+    elif date[0] < now.tm_mday:
         return False
 
     # hour, I let being late 1 hour
-    if int(date[3][0:2]) + 1 < now.tm_hour:
-        return False
-
-    return True
+    if int(date[3][0:2]) + 1 >= now.tm_hour:
+        return True
+    return False
 
 
 def __find_next_meeting__(meetings):
@@ -73,7 +80,7 @@ def __find_next_meeting__(meetings):
     for meeting in meetings:
 
         if (meetings[meeting]["date"] == []) or \
-                (meeting != '@') and (not __check_if_meeting_isnt_old(meetings[meeting]["date"])):
+                ((meeting != '@') and (not __check_if_meeting_isnt_old(meetings[meeting]["date"]))):
             trash.append(meeting)
 
         else:
@@ -81,21 +88,29 @@ def __find_next_meeting__(meetings):
             if meetings[meeting]["date"][2] < meetings[next_meeting_name]["date"][2]:
                 next_meeting_name = meeting
                 continue
+            elif meetings[meeting]["date"][2] > meetings[next_meeting_name]["date"][2]:
+                continue
 
             # comparing month of meeting
             if meetings[meeting]["date"][1] < meetings[next_meeting_name]["date"][1]:
                 next_meeting_name = meeting
+                continue
+            elif meetings[meeting]["date"][1] > meetings[next_meeting_name]["date"][1]:
                 continue
 
             # comparing day of meeting
             if meetings[meeting]["date"][0] < meetings[next_meeting_name]["date"][0]:
                 next_meeting_name = meeting
                 continue
+            elif meetings[meeting]["date"][0] > meetings[next_meeting_name]["date"][0]:
+                continue
 
-            # meeting["date"][3] = "hh:mm", so:
             # comparing hour of meeting
+            # meeting["date"][3] = "hh:mm", so:
             if meetings[meeting]["date"][3][0:2] < meetings[next_meeting_name]["date"][3][0:2]:
                 next_meeting_name = meeting
+                continue
+            if meetings[meeting]["date"][3][0:2] > meetings[next_meeting_name]["date"][3][0:2]:
                 continue
 
             # comparing minute of meeting
