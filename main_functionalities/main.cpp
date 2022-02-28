@@ -84,7 +84,7 @@ void wait_for_meeting() {
         fin >> name;
         // name == "@" means that arent any meeting on the list
         if (name == "@") {
-            std::cout << "You have not any meeting within next 24h. Have a great day!\n";
+            std::cout << "You have not any meeting today. Have a great day!\n";
             std::this_thread::sleep_for(std::chrono::seconds(5));
 
             if (SLEEP_SETTING) {
@@ -157,7 +157,7 @@ void menu(const std::string &name, tm &meeting_time) {
             std::this_thread::sleep_for(std::chrono::minutes(4));
 
         } else {
-            std::cout << "You have not any meeting within next 24h. Have a great day!\n";
+            std::cout << "You have not any meeting today. Have a great day!\n";
             // below duplicated code
             if (SLEEP_SETTING) {
                 std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << 10 << " hours"
