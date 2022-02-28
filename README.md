@@ -25,6 +25,13 @@ Then You can run the program: `./meetings.exe`
 
 -----------------------------------
 
+## Set up for Windows:
+
+Run set_up.bat: `./set_up.bat` <p>
+Then You can run the program: `./meetings.exe`
+
+-----------------------------------
+
 ## Set up for obs-studio
 
 ### Tool for finishing recordins
