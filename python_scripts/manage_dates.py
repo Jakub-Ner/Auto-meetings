@@ -80,6 +80,7 @@ def compare(date, next_meeting_date):
         return -1
     return 0
 
+
 def __find_next_meeting__(meetings):
     next_meeting_name = "@"  # <- empty meeting
     trash = []
@@ -94,33 +95,34 @@ def __find_next_meeting__(meetings):
             # comparing year of meeting
             c = compare(meetings[meeting]["date"][2], meetings[next_meeting_name]["date"][2])
             if c == 1:
-            # if meetings[meeting]["date"][2] < meetings[next_meeting_name]["date"][2]:
                 next_meeting_name = meeting
                 continue
             if c == -1:
-            # elif meetings[meeting]["date"][2] > meetings[next_meeting_name]["date"][2]:
                 continue
 
             # comparing month of meeting
-            if meetings[meeting]["date"][1] < meetings[next_meeting_name]["date"][1]:
+            c = compare(meetings[meeting]["date"][1], meetings[next_meeting_name]["date"][1])
+            if c == 1:
                 next_meeting_name = meeting
                 continue
-            elif meetings[meeting]["date"][1] > meetings[next_meeting_name]["date"][1]:
+            if c == -1:
                 continue
 
             # comparing day of meeting
-            if meetings[meeting]["date"][0] < meetings[next_meeting_name]["date"][0]:
+            c = compare(meetings[meeting]["date"][0], meetings[next_meeting_name]["date"][0])
+            if c == 1:
                 next_meeting_name = meeting
                 continue
-            elif meetings[meeting]["date"][0] > meetings[next_meeting_name]["date"][0]:
+            if c == -1:
                 continue
 
             # comparing hour of meeting
             # meeting["date"][3] = "hh:mm", so:
-            if meetings[meeting]["date"][3][0:2] < meetings[next_meeting_name]["date"][3][0:2]:
+            c = compare(int(meetings[meeting]["date"][3][0:2]), int(meetings[next_meeting_name]["date"][3][0:2]))
+            if c == 1 :
                 next_meeting_name = meeting
                 continue
-            if meetings[meeting]["date"][3][0:2] > meetings[next_meeting_name]["date"][3][0:2]:
+            if c == -1:
                 continue
 
             # comparing minute of meeting

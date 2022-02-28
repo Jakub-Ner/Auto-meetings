@@ -9,6 +9,7 @@ void load_settings();
 void run_meeting();
 void choose_option(int argc, char *argv[]);
 void menu(const std::string &name, tm& meeting_time);
+void sleep(int waiting_time);
 
 void test();
 

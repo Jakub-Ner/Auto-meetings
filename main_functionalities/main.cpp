@@ -34,7 +34,6 @@ int main(int argc, char *argv[]) {
             run_meeting();
         }
     }
-
 }
 
 void load_settings() {
@@ -59,17 +58,34 @@ void run_meeting() {
 
     // record if RECORD_SETTING is "11" or "1"
     if (RECORD_SETTING[0] == '1') {
-        std::thread obs_thread([](){
+        std::thread obs_thread([]() {
             system(open_obs.c_str());
         });
         // record for 105 minutes then close obs and detach thread
-        std::this_thread::sleep_for(std::chrono::minutes (105));
+        std::this_thread::sleep_for(std::chrono::minutes(105));
         system(close_obs.c_str());
         obs_thread.detach();
 
     } else {
         std::this_thread::sleep_for(std::chrono::hours(105));
     }
+
+}
+
+void sleep(int waiting_time) {
+    std::stringstream ss;
+    ss << (waiting_time);
+
+    std::string command;
+    ss >> command;
+
+    command = start_sleep[0] + command + start_sleep[1];
+
+    std::cout << "WARNING: In a moment computer will be hibernated and wake up after around "
+              << (waiting_time) / 3595 // instead of 3600 because '/' rounds down
+              << " hours" << '\n';
+    std::this_thread::sleep_for(std::chrono::minutes(1));
+    system(command.c_str());
 
 }
 
@@ -88,14 +104,7 @@ void wait_for_meeting() {
             std::this_thread::sleep_for(std::chrono::seconds(5));
 
             if (SLEEP_SETTING) {
-                std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << 10 << " hours"
-                          << '\n';
-                std::this_thread::sleep_for(std::chrono::minutes(1));
-
-                std::string command = "36000";
-                command = start_sleep[0] + command + start_sleep[1];
-                system(command.c_str());
-
+                sleep(36000);
             } else {
                 std::this_thread::sleep_for(std::chrono::hours(1));
             }
@@ -121,6 +130,7 @@ void wait_for_meeting() {
     }
 }
 
+
 void menu(const std::string &name, tm &meeting_time) {
     std::string time_to_display = asctime(&meeting_time);
 
@@ -131,19 +141,7 @@ void menu(const std::string &name, tm &meeting_time) {
 //    std::cout<<"time to wait: "<<waiting_time<<"\n";
 
     if (SLEEP_SETTING && waiting_time > 5 * 60) {
-        std::stringstream ss;
-        ss << (waiting_time - 3 * 60);
-
-        std::string command;
-        ss >> command;
-
-        command = start_sleep[0] + command + start_sleep[1];
-
-        std::cout << "WARNING: In a moment computer will be hibernated and wake up after "
-                  << (waiting_time - 60) / 60
-                  << " minutes" << '\n';
-        std::this_thread::sleep_for(std::chrono::minutes(1));
-        system(command.c_str());
+        sleep(waiting_time - 3 * 60);
 
         // after sleeping determine waiting_time
         waiting_time = time_to_wait(meeting_time);
@@ -158,16 +156,9 @@ void menu(const std::string &name, tm &meeting_time) {
 
         } else {
             std::cout << "You have not any meeting today. Have a great day!\n";
-            // below duplicated code
+
             if (SLEEP_SETTING) {
-                std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << 10 << " hours"
-                          << '\n';
-                std::this_thread::sleep_for(std::chrono::minutes(1));
-
-                std::string command = "36000";
-                command = start_sleep[0] + command + start_sleep[1];
-                system(command.c_str());
-
+                sleep(36000);
             } else {
                 std::this_thread::sleep_for(std::chrono::hours(1));
             }
