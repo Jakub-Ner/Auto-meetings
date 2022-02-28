@@ -26,8 +26,6 @@ def prepare_next_meeting(meetings):
     next_meeting_name = __find_next_meeting__(meetings)
     __save_next_meeting__(meetings[next_meeting_name], next_meeting_name)
     # if meeting is disposable delete it
-    if not '@' in next_meeting_name:
-        meetings.pop(next_meeting_name)
 
 
 def __save_next_meeting__(meeting, name):
@@ -76,7 +74,7 @@ def __check_if_meeting_isnt_old(date):
 def compare(date, next_meeting_date):
     if date < next_meeting_date:
         return 1
-    elif date < next_meeting_date:
+    if date > next_meeting_date:
         return -1
     return 0
 
