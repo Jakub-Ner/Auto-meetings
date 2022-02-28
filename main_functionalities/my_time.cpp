@@ -13,6 +13,7 @@ int time_to_wait(const tm &meeting_time) {
     diff.tm_hour = meeting_time.tm_hour - now->tm_hour;
     diff.tm_min = meeting_time.tm_min - now->tm_min;
 
+    // doesn't work if now is 28.02 and the meeting is tomorrow 7 a.m.
     if (diff.tm_mday > 1)
         return 60 * 60 * 24;
 
