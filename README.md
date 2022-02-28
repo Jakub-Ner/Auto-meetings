@@ -18,17 +18,19 @@
 
 ## Set up for Linux (Ubuntu):
 
-Firstly go to automation-of-studies directory <p>
-Give set_up.sh permission: `sudo chmod +x set_up.sh` <p>
-Run set_up.sh: `./set_up.sh` <p>
-Then You can run the program: `./meetings.exe`
+1. Go to Auto-meetings directory and open there terminal<p>
+1. Give set_up.sh permission: `sudo chmod +x set_up.sh` <p>
+1. Run set_up.sh: `./set_up.sh` <p>
+1. Then You can run the program: `./meetings.exe`
 
 -----------------------------------
 
 ## Set up for Windows:
 
-Run set_up.bat: `./set_up.bat` <p>
-Then You can run the program: `./meetings.exe`
+1. Go to Auto-meetings directory in file explorer  <p>
+1. Type `cmd` in the place where is path - it will open command promt in the directory <p>
+1. Run set_up.bat by typing in the terminal: `set_up.bat` <p>
+1. Then You can run the program by typing `meetings.exe`
 
 -----------------------------------
 

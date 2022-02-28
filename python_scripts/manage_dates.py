@@ -73,6 +73,13 @@ def __check_if_meeting_isnt_old(date):
     return False
 
 
+def compare(date, next_meeting_date):
+    if date < next_meeting_date:
+        return 1
+    elif date < next_meeting_date:
+        return -1
+    return 0
+
 def __find_next_meeting__(meetings):
     next_meeting_name = "@"  # <- empty meeting
     trash = []
@@ -85,10 +92,13 @@ def __find_next_meeting__(meetings):
 
         else:
             # comparing year of meeting
-            if meetings[meeting]["date"][2] < meetings[next_meeting_name]["date"][2]:
+            c = compare(meetings[meeting]["date"][2], meetings[next_meeting_name]["date"][2])
+            if c == 1:
+            # if meetings[meeting]["date"][2] < meetings[next_meeting_name]["date"][2]:
                 next_meeting_name = meeting
                 continue
-            elif meetings[meeting]["date"][2] > meetings[next_meeting_name]["date"][2]:
+            if c == -1:
+            # elif meetings[meeting]["date"][2] > meetings[next_meeting_name]["date"][2]:
                 continue
 
             # comparing month of meeting
