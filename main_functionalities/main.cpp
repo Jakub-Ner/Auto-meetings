@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     // use CTRL+C to stop the program
     while (true) {
-        system(get_meetings.c_str()); // for now it is default
+        system(get_meetings.c_str()); // for now, it is default
         load_settings();
 #endif //test_mode
         wait_for_meeting();
@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
             run_meeting();
         }
     }
-    return 0;
+
 }
 
 void load_settings() {
@@ -128,6 +128,7 @@ void menu(const std::string &name, tm &meeting_time) {
     std::cout << "\n" << name << " starts at: " << time_to_display.substr(3, 13) << "\n";
 
     int waiting_time = time_to_wait(meeting_time); // in seconds
+//    std::cout<<"time to wait: "<<waiting_time<<"\n";
 
     if (SLEEP_SETTING && waiting_time > 5 * 60) {
         std::stringstream ss;
@@ -149,8 +150,9 @@ void menu(const std::string &name, tm &meeting_time) {
     }
 
     // the loop finishes 2-6 minutes before meeting
-    while (waiting_time > 6 * 60 * 60) {
-        if (waiting_time < 60 * 60 * 24) {
+    // abs(x) because if now is ex. 27.02 and the meeting is in new month waiting time would be wrong
+    while (abs(waiting_time) > 6 * 60 * 60) {
+        if (abs(waiting_time) < 60 * 60 * 24) {
             std::cout << "time to wait: " << waiting_time / 60 << " minutes" << '\n';
             std::this_thread::sleep_for(std::chrono::minutes(4));
 

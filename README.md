@@ -35,8 +35,8 @@
 1. Go to Auto-meetings directory in file explorer <img src="./assets/file_explorer.png" width="20" title="File Explorer"> <p>
 1. Type `cmd` in the place where is path - it will open command prompt in the directory  <p>
 <img src="./assets/where_type_cmd.jpg" width="500" title="File Explorer"> <p>
-1. Run set_up.bat by typing in the terminal: `set_up.bat` <p>
-1. Then You can run the program by typing `meetings.exe`
+1. Run set_up.bat by typing in the terminal: `.\set_up.bat` <p>
+1. Then You can run the program by typing `.\meetings.exe`
 
 
 ## Set up for obs-studio
