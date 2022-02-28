@@ -59,6 +59,8 @@ You can run the program with parameters:
 ## Disclaimer
 
 - Internet connection is needed
+- sudo is needed to hibernate PC
 - if you want program to search for mails with meetings, you should have installed `Python3`
 - PC in hibernated mode uses energy
-- use `CTRL+C` in terminal to stop running the program
+- Program is designed for non-IT people, that's why .exe is in the repo. Despite this it is
+ recommended to delete this file (new one will be generated after `./set_up.sh`, but you are sure what was compiled) 
