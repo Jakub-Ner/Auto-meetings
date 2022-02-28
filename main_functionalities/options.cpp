@@ -3,7 +3,7 @@
 #include <fstream>
 #include <stdlib.h>
 #include "options.h"
-#include "../variables/GLOBAL"
+#include "../variables/GLOBAL.h"
 #include "JSON.h"
 
 

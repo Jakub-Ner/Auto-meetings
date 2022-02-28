@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 
-#include "../variables/GLOBAL"
+#include "../variables/GLOBAL.h"
 #include "main.h"
 #include "options.h"
 #include "JSON.h"
@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
             run_meeting();
         }
     }
+    return 0;
 }
 
 void load_settings() {
