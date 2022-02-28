@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     // use CTRL+C to stop the program
     while (true) {
-        system(get_meetings.c_str()); // for now it is default
+        system(get_meetings_from_mails.c_str()); // for now it is default
         load_settings();
 #endif //test_mode
         wait_for_meeting();
@@ -51,24 +51,18 @@ void load_settings() {
 void run_meeting() {
     // start meeting
     std::string command = open_page + link;
-    std::cout << command << "\n";
+    std::cout<<command<<"\n";
     system(command.c_str());
-    std::this_thread::sleep_for(std::chrono::seconds(10));
+    std::this_thread::sleep_for(std::chrono::seconds (10));
 
 
     // record if RECORD_SETTING is "11" or "1"
-    if (RECORD_SETTING[0] == '1') {
-        std::thread obs_thread([](){
-            system(open_obs.c_str());
-        });
-        // record for 105 minutes then close obs and detach thread
-        std::this_thread::sleep_for(std::chrono::minutes (105));
-        system(close_obs.c_str());
-        obs_thread.detach();
+    if (RECORD_SETTING[0] == '1')
+        system(open_obs.c_str());
 
-    } else {
-        std::this_thread::sleep_for(std::chrono::hours(105));
-    }
+    // wait 2 hours <- to improve
+    std::this_thread::sleep_for(std::chrono::hours(2));
+
 
 }
 
@@ -84,21 +78,9 @@ void wait_for_meeting() {
         // name == "@" means that arent any meeting on the list
         if (name == "@") {
             std::cout << "You have not any meeting within next 24h. Have a great day!\n";
-            std::this_thread::sleep_for(std::chrono::seconds(5));
-
-            if (SLEEP_SETTING) {
-                std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << 10 << " hours"
-                          << '\n';
-                std::this_thread::sleep_for(std::chrono::minutes(1));
-
-                std::string command = "36000";
-                command = start_sleep[0] + command + start_sleep[1];
-                system(command.c_str());
-
-            } else {
-                std::this_thread::sleep_for(std::chrono::hours(1));
-            }
-        } else {
+            std::this_thread::sleep_for(std::chrono::hours(1));
+        }
+        else{
             fin >> meeting_time.tm_mday;
 
             fin >> meeting_time.tm_mon;
@@ -137,8 +119,7 @@ void menu(const std::string &name, tm &meeting_time) {
 
         command = start_sleep[0] + command + start_sleep[1];
 
-        std::cout << "WARNING: In a moment computer will be hibernated and wake up after "
-                  << (waiting_time - 60) / 60
+        std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << (waiting_time - 60) / 60
                   << " minutes" << '\n';
         std::this_thread::sleep_for(std::chrono::minutes(1));
         system(command.c_str());
@@ -155,20 +136,7 @@ void menu(const std::string &name, tm &meeting_time) {
 
         } else {
             std::cout << "You have not any meeting within next 24h. Have a great day!\n";
-            // below duplicated code
-            if (SLEEP_SETTING) {
-                std::cout << "WARNING: In a moment computer will be hibernated and wake up after " << 10 << " hours"
-                          << '\n';
-                std::this_thread::sleep_for(std::chrono::minutes(1));
-
-                std::string command = "36000";
-                command = start_sleep[0] + command + start_sleep[1];
-                system(command.c_str());
-
-            } else {
-                std::this_thread::sleep_for(std::chrono::hours(1));
-            }
-            // end of duplicated code
+            std::this_thread::sleep_for(std::chrono::hours(1));
         }
 
         waiting_time = time_to_wait(meeting_time);
@@ -179,7 +147,7 @@ void choose_option(int argc, char *argv[]) {
     if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) help();
 
     else if (strcmp(argv[1], "--sleep") == 0 || strcmp(argv[1], "-s") == 0) {
-        std::cout << "sleeping is set to true\n";
+        std::cout << "sleeping is setted to true\n";
         SLEEP_SETTING = true;
 
     } else if (strcmp(argv[1], "--record") == 0 || strcmp(argv[1], "-r") == 0) record();

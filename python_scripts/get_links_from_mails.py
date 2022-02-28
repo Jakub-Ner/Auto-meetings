@@ -5,7 +5,6 @@ import os
 
 from TOP_SECRET import PASS, MY_MAIL
 from manage_dates import convert_months_to_numbers, prepare_next_meeting
-MEETINGS_PATH = f"variables/meetings.json"
 
 
 class Mail:
@@ -18,14 +17,12 @@ class Mail:
         self.mail = imaplib.IMAP4_SSL(self.SMTP_SERVER)
         self.mail.login(self.MY_EMAIL, self.MY_PASS)
 
-        self.email_from = ""
-
-    def read_mails(self, email_from):
-        self.email_from = email_from
-        data = self.mail.search(None, 'FROM', self.email_from)
+    def read_mails(self, FROM):
+        self.mail.select('inbox')
+        data = self.mail.search(None, 'FROM', FROM)
         ids = data[1][0].split()
         ids.reverse()
-
+        message = "";
         link = ""
         for i in ids:
             data = self.mail.fetch(str(int(i)), '(RFC822)')
@@ -40,22 +37,18 @@ class Mail:
         words = message.split()
         for i, word in enumerate(words):
             if "termin" in word:
-                try:
-                    date = []
-                    for j in range(1, 5):
-                        if j % 2 == 1:
-                            date.append(int(words[i + j]))  # day and year
-                        else:
-                            date.append(words[i + j])  # month and hh:mm
 
-                    # this below doesn't make sense
-                    for i in range(i + 4, len(words)):
-                        if "https://pwr-edu.zoom" in words[i]:  # <- to repair
-                            return words[i], date
+                date = []
+                for j in range(1, 5):
+                    if j % 2 == 1:
+                        date.append(int(words[i + j]))  # day and year
+                    else:
+                        date.append(words[i + j])  # month and hh:mm
 
-                except:
-                    os.system('echo "ERROR: Invalid date format in mail! from {}"'.format(self.email_from))
-
+                # below i doesnt make sense
+                for i in range(i + 4, len(words)):
+                    if "https://pwr-edu.zoom" in words[i]:  # <- to repair
+                        return words[i], date
         return "", []
 
     def end(self):
@@ -65,39 +58,19 @@ class Mail:
 
 if __name__ == "__main__":
 
-    # if file didn't exist a+ creates it
-    with open(MEETINGS_PATH, "a+") as file:
-        # if file is empty give necessary data
-        if os.stat(MEETINGS_PATH).st_size == 0:
-            necessary_data = {
-                "@": {
-                    "date": [
-                        40,  # day
-                        13,  # month
-                        2222,  # year
-                        "25:62"  # hour:minute
-                    ],
-                    "link": ""
-                }}
-            json.dump(necessary_data, file, indent=2)
-
-    # if you want to run only python scripts change MEETINGS_PATH to
+    # if you want to run only python scripts change path to
     # "../variables/meetings.json"
-    with open(MEETINGS_PATH, "r") as data:
+    with open("variables/meetings.json", "r") as data:
         meetings = json.load(data)
-
     try:
         M = Mail()
-        M.mail.select('inbox')
 
         for mail in meetings:
             if len(mail) > 1:
                 if "@" in mail:
                     url, date = M.read_mails(mail)
                     meetings[mail]["link"] = url
-                    if date:
-                        date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
-
+                    date[1] = convert_months_to_numbers(date[1])  # e.g "lutego" into 2
                     meetings[mail]["date"] = date
 
                 # new mails will be added to the beginning of the list,
@@ -113,5 +86,5 @@ if __name__ == "__main__":
 
     # if you want to run only python scripts change path to
     # "../variables/meetings.json"
-    with open(MEETINGS_PATH, "w") as data:
+    with open("variables/meetings.json", "w") as data:
         json.dump(meetings, data, indent=2)

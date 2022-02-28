@@ -2,6 +2,6 @@
 #define AUTOMATION_OF_STUDIES_GLOBAL_
 
 //#define test_mode
-#include "operating_systems/Ubuntu.h"
+#include "operating_systems/Windows.h"
 
 #endif //AUTOMATION_OF_STUDIES_GLOBAL_
