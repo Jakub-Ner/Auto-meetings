@@ -18,7 +18,7 @@
 
 ## Set up for Linux (Ubuntu):
 
-1. Go to Auto-meetings directory and open there terminal <img src="./file_explorer.png" width="20" title="File Explorer"> <p>
+1. Go to Auto-meetings directory and open there terminal  <p>
 1. Give set_up.sh permission: `sudo chmod +x set_up.sh` <p>
 1. Run set_up.sh: `./set_up.sh` <p>
 1. Then You can run the program: `./meetings.exe`
@@ -27,8 +27,9 @@
 
 ## Set up for Windows:
 
-1. Go to Auto-meetings directory in file explorer  <p>
-1. Type `cmd` in the place where is path - it will open command promt in the directory <p>
+1. Go to Auto-meetings directory in file explorer <img src="./file_explorer.png" width="20" title="File Explorer"> <p>
+1. Type `cmd` in the place where is path - it will open command promt in the directory 
+<img src="./assets/where_type_cmd.jpg" width="100" title="File Explorer"> <p>
 1. Run set_up.bat by typing in the terminal: `set_up.bat` <p>
 1. Then You can run the program by typing `meetings.exe`
 
