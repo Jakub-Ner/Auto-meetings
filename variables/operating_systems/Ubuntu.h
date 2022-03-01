@@ -4,7 +4,7 @@
 #include <iostream>
 
 const std::string open_page = "xdg-open ";
-const std::string open_obs = "obs-studio --startrecording";
+const std::string open_obs = "obs-studio --startrecording &>/dev/null";
 const std::string close_obs = "pkill -f -9 obs-studio";
 const std::string get_meetings = "./get_links.sh";
 const std::string start_sleep[] = {"sudo rtcwake -u -s ", " -m mem"};

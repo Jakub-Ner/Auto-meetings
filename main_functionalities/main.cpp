@@ -61,13 +61,13 @@ void run_meeting() {
         std::thread obs_thread([]() {
             system(open_obs.c_str());
         });
-        // record for 105 minutes then close obs and detach thread
-        std::this_thread::sleep_for(std::chrono::minutes(105));
+        // record for 106 minutes then close obs and detach thread
+        std::this_thread::sleep_for(std::chrono::minutes(106));
         system(close_obs.c_str());
         obs_thread.detach();
 
     } else {
-        std::this_thread::sleep_for(std::chrono::hours(105));
+        std::this_thread::sleep_for(std::chrono::hours(106));
     }
 
 }
@@ -136,6 +136,7 @@ void menu(const std::string &name, tm &meeting_time) {
 
     // at the end of time_to_display appear default weekday, so cut it
     std::cout << "\n" << name << " starts at: " << time_to_display.substr(3, 13) << "\n";
+    std::this_thread::sleep_for(std::chrono::seconds (5));
 
     int waiting_time = time_to_wait(meeting_time); // in seconds
 //    std::cout<<"time to wait: "<<waiting_time<<"\n";
@@ -152,7 +153,7 @@ void menu(const std::string &name, tm &meeting_time) {
     while (abs(waiting_time) > 6 * 60 * 60) {
         if (abs(waiting_time) < 60 * 60 * 24) {
             std::cout << "time to wait: " << waiting_time / 60 << " minutes" << '\n';
-            std::this_thread::sleep_for(std::chrono::minutes(4));
+            std::this_thread::sleep_for(std::chrono::hours (1));
 
         } else {
             std::cout << "You have not any meeting today. Have a great day!\n";
