@@ -16,6 +16,9 @@ OPTIONS
     -s, --sleep             Sleep PC until next meeting. Then turn on the meeting. After meeting sleep again...
     -r, --record            Set you recording preferences
 )";
+    // Program will pause
+    std::string stop;
+    std::cin>>stop;
 }
 
 void add_meeting(const std::string &link, std::string date) {
