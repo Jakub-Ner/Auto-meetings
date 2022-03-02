@@ -3,6 +3,7 @@
 
 std::string link;
 std::string name;
+bool check_mail_again;
 
 void wait_for_meeting();
 void load_settings();

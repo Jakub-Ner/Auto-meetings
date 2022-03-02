@@ -136,39 +136,41 @@ void menu(const std::string &name, tm &meeting_time) {
 
     // at the end of time_to_display appear default weekday, so cut it
     std::cout << "\n" << name << " starts at: " << time_to_display.substr(3, 13) << "\n";
-    std::this_thread::sleep_for(std::chrono::seconds (5));
+    std::this_thread::sleep_for(std::chrono::seconds(5));
 
     int waiting_time = time_to_wait(meeting_time); // in seconds
-//    std::cout<<"time to wait: "<<waiting_time<<"\n";
 
-    if (SLEEP_SETTING && waiting_time > 5 * 60) {
-        sleep(waiting_time - 3 * 60);
+    // the loop finishes 2-6 minutes before meeting
+    // abs(x) because if now is ex. 27.02 and the meeting is in new month waiting time would be wrong
+    if (abs(waiting_time) > 60 * 60) {
+        check_mail_again = true;
+        if (abs(waiting_time) < 60 * 60 * 8) {
+            std::cout << "time to wait: " << waiting_time / 60 << " minutes" << '\n';
+            if (SLEEP_SETTING) sleep(abs(waiting_time) - 60 * 3);
+            else std::this_thread::sleep_for(std::chrono::hours(1));
+
+        } else {
+            std::cout << "You have not any meeting at least for the next 8 hours. Have a great day!\n";
+            if (SLEEP_SETTING) {
+                sleep(3600*8);
+            } else {
+                std::this_thread::sleep_for(std::chrono::hours(1));
+            }
+        }
+        waiting_time = time_to_wait(meeting_time);
+
+    }
+    while (waiting_time > 5 * 60) {
+        if (SLEEP_SETTING)
+            sleep(waiting_time - 3 * 60);
 
         // after sleeping determine waiting_time
         waiting_time = time_to_wait(meeting_time);
     }
 
-    // the loop finishes 2-6 minutes before meeting
-    // abs(x) because if now is ex. 27.02 and the meeting is in new month waiting time would be wrong
-    while (abs(waiting_time) > 6 * 60 * 60) {
-        if (abs(waiting_time) < 60 * 60 * 24) {
-            std::cout << "time to wait: " << waiting_time / 60 << " minutes" << '\n';
-            std::this_thread::sleep_for(std::chrono::hours (1));
-
-        } else {
-            std::cout << "You have not any meeting today. Have a great day!\n";
-
-            if (SLEEP_SETTING) {
-                sleep(36000);
-            } else {
-                std::this_thread::sleep_for(std::chrono::hours(1));
-            }
-            // end of duplicated code
-        }
-
-        waiting_time = time_to_wait(meeting_time);
-    }
 }
+
+
 
 void choose_option(int argc, char *argv[]) {
     if (strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0) help();

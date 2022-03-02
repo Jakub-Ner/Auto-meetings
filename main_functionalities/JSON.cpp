@@ -10,27 +10,27 @@ bool JSON::check_json_correctness() {
 }
 
 void JSON::repair_json() {
-
+ // ...
 }
 
 
 void JSON::read_json() {
     std::ifstream file;
-    file.open(json_path);
+    file.open(m_json_path);
 
     // if file exist and is not empty:
     if (file && file.peek() != std::ifstream::traits_type::eof()) {
-        _content = read_data_at_once(file);
+        m_content = read_data_at_once(file);
         file.close();
 
     } else {
         file.close();
         std::ofstream new_file;
-        new_file.open(json_path);
+        new_file.open(m_json_path);
 
         new_file << "{}";
         new_file.close();
-        _content = "{}"; // create new json
+        m_content = "{}"; // create new json
     }
 }
 
@@ -41,36 +41,36 @@ std::string JSON::read_data_at_once(std::ifstream &file) {
 }
 
 void JSON::save_meeting(const std::string &link, const std::string &date) {
-    _link = link;
-    _date = date;
+    m_link = link;
+    m_date = date;
     read_json();
-    if (_content[_content.size() - 1] != '}')
+    if (m_content[m_content.size() - 1] != '}')
         check_json_correctness();
 
     // preprocess
-    _content[_content.size() - 2] = ',';
-    _content.erase(_content.end() - 1);
+    m_content[m_content.size() - 2] = ',';
+    m_content.erase(m_content.end() - 1);
 
     // now can easily add data
     convert_data_to_json();
 
     std::ofstream fout;
-    fout.open(json_path);
-    fout << _content;
+    fout.open(m_json_path);
+    fout << m_content;
     fout.close();
 }
 
 void JSON::convert_data_to_json() {
     get_name();
-    std::cout << _name;
-    _content += "\n  \"" + _name + "\": {\n"
+    std::cout << m_name;
+    m_content += "\n  \"" + m_name + "\": {\n"
                 + "     \"date\": [\n"
-                +"          " + number(_date.substr(6, 2)) + ",\n"   // day
-                +"          " + number(_date.substr(9, 2)) + ",\n"   // month
-                +"          " + _date.substr(12, 4) +",\n"                // year
-                +"          \"" + _date.substr(0, 2) + ":"+ _date.substr(3, 2) + "\"\n" // hour:minute
+                +"          " + number(m_date.substr(6, 2)) + ",\n"   // day
+                +"          " + number(m_date.substr(9, 2)) + ",\n"   // month
+                +"          " + m_date.substr(12, 4) +",\n"                // year
+                +"          \"" + m_date.substr(0, 2) + ":"+ m_date.substr(3, 2) + "\"\n" // hour:minute
                 +"          " + "],\n"
-                +"      \"link\": \"" + _link + "\"\n"
+                +"      \"link\": \"" + m_link + "\"\n"
                 +"  }\n"
                 +"}";
 }
@@ -81,7 +81,7 @@ std::string JSON::number(std::string &&date){
 
 void JSON::get_name() {
     std::ifstream file;
-    file.open(names_path);
+    file.open(m_names_path);
 
     std::string file_content = read_data_at_once(file);
     extract_name_and_remove_from_list(file_content);
@@ -89,13 +89,13 @@ void JSON::get_name() {
     file.close();
 
     std::ofstream new_file;
-    new_file.open(names_path);
+    new_file.open(m_names_path);
     new_file << file_content;
     new_file.close();
 }
 
 void JSON::extract_name_and_remove_from_list(std::string &file_content) {
-    _name = "";
+    m_name = "";
     int counter = file_content.size() - 1;
 
     if (counter <= 0) {
@@ -103,7 +103,7 @@ void JSON::extract_name_and_remove_from_list(std::string &file_content) {
     }
 
     while (file_content[counter] != ';') { // counter >= 0 in useless
-        _name += file_content[counter];
+        m_name += file_content[counter];
         counter--;
     }
     if (!file_content.empty())
@@ -112,7 +112,7 @@ void JSON::extract_name_and_remove_from_list(std::string &file_content) {
 
 void JSON::generate_names() {
     std::ofstream fout;
-    fout.open(names_path);
+    fout.open(m_names_path);
 
     for (int j = 9; j >= 0; j--) {
         const char id1 = j + '0';
