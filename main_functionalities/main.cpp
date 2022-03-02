@@ -24,12 +24,26 @@ int main(int argc, char *argv[]) {
         choose_option(argc, argv);
     }
 
-    // use CTRL+C to stop the program
-    while (true) {
-        system(get_meetings.c_str()); // for now, it is default
-        load_settings();
+//// here should be new thread.
+/// It will let user to use command when the program is running
+//    while(run){
+//        std::string command;
+//        std::cin>> command;
+//        choose_option(command)
+//    }
+//
+    load_settings();
+
+    // use CTRL+C to stop the program or (not available yet) type exit
+//// this loop is (and will be) driven by main thread
+    while (run) {
 #endif //test_mode
-        wait_for_meeting();
+
+//         when we haven't any meetings soon, we will check sometimes if we haven't any new ones
+//        while(check_mail_again){
+            system(get_meetings.c_str()); // for now, it is default
+            wait_for_meeting();
+//        }
         if (name != "@") {
             run_meeting();
         }
@@ -179,7 +193,10 @@ void choose_option(int argc, char *argv[]) {
         std::cout << "sleeping is set to true\n";
         SLEEP_SETTING = true;
 
-    } else if (strcmp(argv[1], "--record") == 0 || strcmp(argv[1], "-r") == 0) record();
+    } else if (strcmp(argv[1], "--record") == 0 || strcmp(argv[1], "-r") == 0) {
+        record();
+        load_settings();
+    }
 
     else if (argc == 4) {
         if (strcmp(argv[1], "--add") == 0 || strcmp(argv[1], "-a") == 0)
