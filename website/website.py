@@ -11,19 +11,16 @@ website = Blueprint("views", __name__)
 def home():
     with open("variables/meetings.json", "r+") as meetings:
         meetings = json.load(meetings)
-        print("cokolwiek")
         if request.method == 'POST':
             try:
                 if request.form["sign-in"]:
-                    subprocess.run(shlex.split("sudo gedit ./python_scripts/TOP_SECRET.py"))
-            except Exception as e:
-                pass
-                # print(e)  # <- not sure
+                    subprocess.call(shlex.split("./auth.sh"))
+            except Exception as e: ...
+
             try:
                 if request.form["delete"]:
-                    print("ok")
                     print(request.form["delete"])
-            except Exception as e: print("nie pytklo")
+            except Exception as e: ...
 
             try:
                 if not request.form["date"] or not request.form["link"]:

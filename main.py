@@ -7,9 +7,9 @@ app = create_app()
 
 
 
-if __name__ == "__main__": # this wont run if we import this, we have to run this file
+if __name__ == "__main__":
     meeting_from_mails = threading.Thread(target=search_meetings_periodically)
-    # meeting_from_mails.start()
+    meeting_from_mails.start()
 
     app.run(debug=True)
-    # meeting_from_mails.join()
+    meeting_from_mails.join()
