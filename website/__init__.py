@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect
 
 from .website import website
 from .jinja_functions import next, delete
