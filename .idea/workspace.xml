@@ -5,100 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="25e14bb3-4d77-455d-9e0a-0c86701488ed" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/automation-of-studies.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_links.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/get_links.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/meetings.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/main.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/archive/bg.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/archive/generic.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/archive/poradniki.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/css/fontawesome-all.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/css/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/css/noscript.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/js/breakpoints.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/js/browser.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/js/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/js/jquery.scrollex.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/js/jquery.scrolly.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/js/util.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/base/_page.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/base/_reset.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/base/_typography.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_actions.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_box.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_button.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_form.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_icon.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_icons.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_image.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_list.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_pagination.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_row.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_section.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/components/_table.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/layout/_footer.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/layout/_header.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/layout/_intro.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/layout/_main.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/layout/_nav.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/layout/_navPanel.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/layout/_wrapper.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/libs/_breakpoints.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/libs/_fixed-grid.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/libs/_functions.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/libs/_html-grid.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/libs/_mixins.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/libs/_vars.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/libs/_vendor.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/main.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/sass/noscript.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-brands-400.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-brands-400.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-brands-400.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-brands-400.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-brands-400.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-regular-400.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-regular-400.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-regular-400.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-regular-400.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-regular-400.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-solid-900.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-solid-900.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-solid-900.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-solid-900.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/assets/webfonts/fa-solid-900.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/elements.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/generic.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/ben-griffiths-P2BJH8VHs2k-unsplash.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/overlay.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic01.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic02.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic03.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic04.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic05.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic06.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic07.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic08.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/static/strona_www/images/pic09.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/templates/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/new/website/website.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_scripts/get_links_from_mails.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_scripts/get_links_from_mails.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/set_up.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/set_up.sh" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/python_scripts/COMMANDS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -111,13 +31,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Auto-meetings" />
@@ -156,5 +76,16 @@
       <updated>1658837504047</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
