@@ -1,10 +1,16 @@
-from flask import Blueprint, request, flash
+import os
+import time
+
+from flask import Blueprint, request
+from flask.helpers import flash
 from werkzeug.exceptions import BadRequestKeyError
+from threading import Thread
 import json
 import shlex
 import subprocess
 
-from website.jinja_functions import save_meetings
+from variables.operating_systems.Ubuntu import start_sleep
+from website.jinja_functions import save_meetings, next_meeting
 
 buttons = Blueprint("buttons", __name__)
 
@@ -35,7 +41,12 @@ def menu(meetings):
 
     try:
         if request.form["menu"] == "sleep":
-            print("spać")
+            sleeping_time, _, _ = next_meeting()
+
+            flash(f"Computer will hibernate and wake up after around {sleeping_time} minutes")
+            sleeping_thread = Thread(target=sleep, args=(sleeping_time,))
+            sleeping_thread.start()
+
     except BadRequestKeyError:
         ...
 
@@ -52,3 +63,8 @@ def menu(meetings):
                 config_new.write(json.dumps(config))
     except BadRequestKeyError:
         ...
+
+
+def sleep(sleeping_time):
+    time.sleep(15)
+    os.system(start_sleep[0] + str(sleeping_time - 1) + start_sleep[1])

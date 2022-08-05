@@ -75,8 +75,12 @@
         </form>
 
         <header class="major" margin-bottom="100px">
-            <a><h3 style="color:grey">Next meeting starts in </h3>
-                {{ next_meeting() }}
+            <a><h3 style="color:grey">Details of the next meeting</h3>
+                    {% set time, unit, name, link = next_meeting() %}
+                    Next meeting starts at:  {{ time }} {{ unit }} <br>
+                    It is named: {{ name }} <br>
+                    Link: {{ link }}
+
             </a>
         </header>
 
@@ -84,7 +88,6 @@
             <a><h3 align="center" style="color:grey">Meetings </h3>
                 <ul class="list-group list-group-flush" id="meeting">
                     {% for meeting in meetings %}
-                    <!--                    <form action="delete" method="POST">-->
                     <form method="POST">
                         <li class="list-group-item text-left" style="background-color:#000000;">
                             {{meeting[:-4] + ":"}} {{ meetings[meeting] }}

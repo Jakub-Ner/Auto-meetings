@@ -1,80 +1,23 @@
-import imaplib
-import email
 import json
 import os
-import time 
+import time
 
-from .TOP_SECRET import PASS, MY_MAIL
+from .Mail import Mail
 from .manage_dates import convert_months_to_numbers, prepare_next_meeting
 
 MEETINGS_PATH = f"variables/meetings.json"
-
-
-class Mail:
-    def __init__(self):
-        self.MY_EMAIL = MY_MAIL
-        self.MY_PASS = PASS
-        self.SMTP_PORT = 993
-        self.SMTP_SERVER = "imap.gmail.com"
-
-        self.mail = imaplib.IMAP4_SSL(self.SMTP_SERVER)
-        self.mail.login(self.MY_EMAIL, self.MY_PASS)
-
-        self.email_from = ""
-
-    def read_mails(self, email_from):
-        self.email_from = email_from
-        data = self.mail.search(None, 'FROM', self.email_from)
-        ids = data[1][0].split()
-        ids.reverse()
-
-        links = []
-        dates = []
-        for i in ids:
-            data = self.mail.fetch(str(int(i)), '(RFC822)')
-            state, response_part = data
-            message = str(email.message_from_string(str(response_part[0][1], "utf-8")).get_payload(0))
-            link, date = self.find_data(message)
-            if link:
-                links.append(link)
-                dates.append(date)
-        return links, dates
-
-    def find_data(self, message):
-        words = message.split()
-        for i, word in enumerate(words):
-            if "termin" in word:
-                try:
-                    date = []
-                    for j in range(1, 5):
-                        if j % 2 == 1:
-                            date.append(int(words[i + j]))  # day and year
-                        else:
-                            date.append(words[i + j])  # month and hh:mm
-
-                    # this below doesn't make sense
-                    for i in range(i + 4, len(words)):
-                        if "https://pwr-edu.zoom" in words[i]:  # <- to repair
-                            return words[i], date
-
-                except:
-                    os.system('echo "ERROR: Invalid date format in mail! from {}"'.format(self.email_from))
-
-        return "", []
-
-    def end(self):
-        self.mail.close()
-        self.mail.logout()
 
 
 def __create_key(name, index):
     key = name.split('@')
     return key[0] + key[1] + str(index)
 
+
 def search_meetings_periodically():
     while True:
         search_meetings()
-        time.sleep(3*60*60)
+        time.sleep(3 * 60 * 60)
+
 
 def search_meetings():
     os.system('echo start searching')
@@ -139,4 +82,3 @@ def search_meetings():
 
     with open(MEETINGS_PATH, "w") as data:
         json.dump(meetings, data, indent=2)
-    
