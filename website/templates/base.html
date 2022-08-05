@@ -1,0 +1,194 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+    <title>Auto-Meetings</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+    />
+
+    <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="static/strona_www/assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="static/strona_www/assets/css/noscript.css"/>
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper" class="fade-in">
+
+    <!-- Header -->
+    <header id="header">
+        <a class="logo">Auto-Meetings</a>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %} {% if category ==
+        "error" %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close pull-right" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% else %}
+        <div class="alert alert-success alter-dismissable fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close pull-right" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+        <!--        <form method="POST" action="menu">-->
+        <form method="POST">
+            <div align="center">
+                <button type="submit" name="menu" value="sign-up" class="btn btn-primary">Set up email</button>
+
+                <button type="submit" name="menu" value="sleep" class="btn btn-primary">Sleep</button>
+
+                {% if get_config()["record"] %}
+                <button type="submit" name="menu" value="record-off" class="btn btn-success">Record</button>
+                {% else %}
+                <button type="submit" name="menu" value="record-on" class="btn danger">Record</button>
+                {% endif %}
+            </div>
+        </form>
+
+        <header class="major" margin-bottom="100px">
+            <a><h3 style="color:grey">Next meeting starts in </h3>
+                {{ next_meeting() }}
+            </a>
+        </header>
+
+        <header class="major">
+            <a><h3 align="center" style="color:grey">Meetings </h3>
+                <ul class="list-group list-group-flush" id="meeting">
+                    {% for meeting in meetings %}
+                    <!--                    <form action="delete" method="POST">-->
+                    <form method="POST">
+                        <li class="list-group-item text-left" style="background-color:#000000;">
+                            {{meeting[:-4] + ":"}} {{ meetings[meeting] }}
+
+                            <button type="submit" class="btn-close pull-right" name="delete" value={{ meeting }}>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </li>
+                    </form>
+                    {% endfor %}
+                </ul>
+            </a>
+        </header>
+        <form method="POST">
+            <h4 align="center" style="color:grey"><i>
+                Give an email if AM should search for next meetings
+            </i></h4>
+
+            <div class="d-flex justify-content-center">
+
+                <div class="form-group">
+                    <label for="name"> Name/Email</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            name="name"
+                            placeholder="Name/Email"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="date">DD-MM-YYYY hh:mm</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="date"
+                            name="date"
+                            placeholder="Date"
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            id="link"
+                            name="link"
+                            placeholder="Link"
+                    />
+                </div>
+            </div>
+            <div align="center">
+                <button type="submit" name="add-meeting" value="1" class="btn btn-primary">Add meeting</button>
+            </div>
+        </form>
+
+
+    </div>
+</div>
+
+<!-- Copyright -->
+<div id="copyright">
+    <ul>
+        <li>&copy; Untitled</li>
+        <li>Assets: <a href="https://html5up.net">HTML5 UP</a></li>
+        <li>Page & Project: <a href="https://github.com/Jakub-Ner">Jakub Ner</a></li>
+    </ul>
+</div>
+
+</div>
+
+<!-- Scripts -->
+<script src="static/strona_www/assets/js/jquery.min.js"></script>
+<script src="static/strona_www/assets/js/jquery.scrollex.min.js"></script>
+<script src="static/strona_www/assets/js/jquery.scrolly.min.js"></script>
+<script src="static/strona_www/assets/js/browser.min.js"></script>
+<script src="static/strona_www/assets/js/breakpoints.min.js"></script>
+<script src="static/strona_www/assets/js/util.js"></script>
+<script src="static/strona_www/assets/js/main.js"></script>
+
+<script
+        type="text/javascript"
+        src="{{ url_for('static', filename='index.js') }}"
+></script>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+        crossorigin="anonymous"
+></script>
+
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"
+        integrity="sha512-nnzkI2u2Dy6HMnzMIkh7CPd1KX445z38XIu4jG1jGw7x5tSL3VBjE44dY4ihMU1ijAQV930SPM12cCFrB18sVw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"
+></script>
+
+</body>
+
+</html>
