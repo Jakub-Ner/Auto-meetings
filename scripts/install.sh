@@ -12,7 +12,8 @@ sudo useradd ${NAME}
 #
 #
 echo -e "\n Protection for credentials:\n"
-sudo touch ${TOP_SECRET_DIR}
+sudo echo -e 'PASS=""\nMY_MAIL=""' > ${TOP_SECRET_DIR}
+sudo chmod 700 ${TOP_SECRET_DIR}
 sudo setfacl -m u:${NAME}:rwx ${TOP_SECRET_DIR}
 #
 sudo chown root:root $(pwd)/auth.sh
