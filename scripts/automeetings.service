@@ -1,0 +1,13 @@
+[Unit]
+Description=Auto-meetings
+
+[Service]
+User=auto-meetings
+StandardOutput=journal
+StandardError=journal
+Restart=on-failure
+RestartSec=1
+ExecStart=/home/jakubner/anaconda3/bin/python -u /home/jakubner/programowanie/projekty/Auto-meetings/scripts/../main.py
+
+[Install]
+WantedBy=multi-user.target

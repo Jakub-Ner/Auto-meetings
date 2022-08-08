@@ -1,7 +1,8 @@
 #!/bin/bash
+source CONST.sh
 
 echo "set-up email"
-gedit admin://$(pwd)/../python_scripts/TOP_SECRET_TEST.py
+gedit admin://${TOP_SECRET_DIR}
 
 #xhost +si:localuser:root
 #xhost -si:localuser:root
