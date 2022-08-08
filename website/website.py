@@ -17,7 +17,7 @@ def home(meetings):
 
         # buttons
         delete(meetings)
-        menu(meetings)
+        menu()
 
         try:
             if not ((request.form["date"] and request.form["link"]) or request.form["name"]):

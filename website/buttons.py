@@ -29,11 +29,11 @@ def delete(meetings):
 
 # @buttons.route("/menu", methods=['POST'])
 # @base
-def menu(meetings):
+def menu():
     try:
         if request.form["menu"] == "sign-up":
             try:
-                subprocess.call(shlex.split("./auth.sh"))
+                subprocess.call(shlex.split("sudo ./auth.sh"))
             except Exception as e:
                 print(e)
     except BadRequestKeyError:
@@ -41,7 +41,7 @@ def menu(meetings):
 
     try:
         if request.form["menu"] == "sleep":
-            sleeping_time, _, _ = next_meeting()
+            sleeping_time, _, _, _ = next_meeting()
 
             flash(f"Computer will hibernate and wake up after around {sleeping_time} minutes")
             sleeping_thread = Thread(target=sleep, args=(sleeping_time,))
@@ -66,5 +66,5 @@ def menu(meetings):
 
 
 def sleep(sleeping_time):
-    time.sleep(15)
+    time.sleep(7)
     os.system(start_sleep[0] + str(sleeping_time - 1) + start_sleep[1])
