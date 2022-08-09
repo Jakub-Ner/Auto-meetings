@@ -1,18 +1,24 @@
 # Auto-Meetings - DEMO
 
 ## Table of Contents
-- [What makes it useful](#1)
+- [Why care](#1)
 - [Set up](#set-up):
   - [Linux (Ubuntu)](#L)
  - [Disclaimer](#Disclaimer)
 
 <a name="1"> <a/>
-## What makes it useful:
-- User can manage Auto-meetings via WebUI (to open, use `auto-meetings` in terminal)
-- If setted, it Searches on mailbox for mails with information about meetings.
-- It Joins meeting when it should and if user agreed, starts recording
-- It Runs in the background as a systemd service
-- It Can hibernate till next meeting, then hibernate till...
+## Why care?
+Do you find yourself forgetting about next recruitment meeting or webinar you have enrolled? Have plans for weekend, but also interesting webinar? Auto meetings will resolve the problems.
+- In the webUI You can see a**list of following meetings**. 
+- If You want, it can even **check Your mailbox** for new ones.  
+- You can hibernate PC via WebUI and it will **wake up Your PC** a moment before meeting and **record** the meeting for You.
+- If You go to vacation during, e.g. academic year, hibernating PC via WebUI will do to be on all lectures, because Auto-meetings **wakes up the PC at least every 10 hours**, to check for new meetings.
+
+Beside that:
+- Auto-meetings runs in the background as a lightweight systemd service.
+- To open WebUI run `auto-meetings` in terminal
+- It is free
+
 
 -------------------------------------------------
 <a name="set-up"> </a> 
