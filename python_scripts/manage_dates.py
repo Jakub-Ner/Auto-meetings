@@ -1,3 +1,5 @@
+import os
+
 MONTHS = {"stycz": 1,
           "lut": 2,
           "mar": 3,
@@ -29,9 +31,8 @@ def prepare_next_meeting(meetings):
 
 
 def __save_next_meeting__(meeting, name):
-    # if you want to run only python scripts change path to
-    # "../variables/meetings.json"
-    with open(f'variables/next_meeting.json', 'w+') as fin:
+    absolute_path = os.path.dirname(os.path.abspath(__file__))
+    with open(absolute_path + '/../variables/next_meeting.json', 'w+') as fin:
         fin.write(name)
         fin.write("\n")
 

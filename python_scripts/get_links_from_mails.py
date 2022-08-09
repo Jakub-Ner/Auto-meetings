@@ -5,7 +5,7 @@ import time
 from .Mail import Mail
 from .manage_dates import convert_months_to_numbers, prepare_next_meeting
 
-MEETINGS_PATH = f"variables/meetings.json"
+MEETINGS_PATH = os.path.dirname(os.path.abspath(__file__)) + f"/../variables/meetings.json"
 
 
 def __create_key(name, index):
