@@ -12,7 +12,7 @@ Do you find yourself forgetting about next recruitment meeting or webinar you ha
 - In the webUI You can see a**list of following meetings**. 
 - If You want, it can even **check Your mailbox** for new ones.  
 - You can hibernate PC via WebUI and it will **wake up Your PC** a moment before meeting and **record** the meeting for You.
-- If You go to vacation during, e.g. academic year, hibernating PC via WebUI will do to be on all lectures, because Auto-meetings **wakes up the PC at least every 10 hours**, to check for new meetings.
+- If You go to vacation during, e.g. academic year, hibernating PC via WebUI will do to be on all lectures, because Auto-meetings **wakes up the PC at least every 10 hours** to check for new meetings.
 
 Beside that:
 - Auto-meetings runs in the background as a lightweight systemd service.
