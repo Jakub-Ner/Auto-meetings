@@ -33,7 +33,7 @@ def menu():
     try:
         if request.form["menu"] == "sign-up":
             try:
-                subprocess.call(shlex.split("sudo ./auth.sh"))
+                subprocess.call(shlex.split(path_to_variables + "/../scripts/auth.sh"))
             except Exception as e:
                 print(e)
     except BadRequestKeyError:
@@ -67,4 +67,4 @@ def menu():
 
 def sleep(sleeping_time):
     time.sleep(7)
-    os.system(start_sleep[0] + str(sleeping_time - 1) + start_sleep[1])
+    os.system(start_sleep + str(sleeping_time - 1))

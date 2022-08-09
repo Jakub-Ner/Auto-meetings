@@ -18,7 +18,13 @@ sudo setfacl -m u:${NAME}:rwx ${TOP_SECRET_DIR}
 #
 sudo chown root:root $(pwd)/auth.sh
 sudo chmod 106 $(pwd)/auth.sh
-sudo echo "auto-meetings ALL=(ALL) NOPASSWD: $(pwd)/auth.sh" > /etc/sudoers.d/${NAME}
+#
+sudo chown root:root $(pwd)/sleep.sh
+sudo chmod 106 $(pwd)/sleep.sh
+#
+sudo echo "auto-meetings ALL=(ALL) NOPASSWD: /bin/bash $(pwd)/auth.sh" > /etc/sudoers.d/${NAME}
+sudo echo "Cmnd_Alias SLEEP = /usr/sbin/rtcwake -u -m mem -s *" | tee -a /etc/sudoers.d/${NAME}
+sudo echo "auto-meetings ALL=(ALL) NOPASSWD: SLEEP" | tee -a /etc/sudoers.d/${NAME}
 #
 #
 echo -e "\n Setting up auto-meetings as a systemd service:\n"
