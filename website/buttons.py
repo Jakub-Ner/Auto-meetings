@@ -27,15 +27,18 @@ def delete(meetings):
         ...
 
 
+import logging
+
+
 # @buttons.route("/menu", methods=['POST'])
 # @base
 def menu():
     try:
         if request.form["menu"] == "sign-up":
-            try:
-                subprocess.call(shlex.split(path_to_variables + "/../scripts/auth.sh"))
-            except Exception as e:
-                print(e)
+            subprocess.run(
+                shlex.split(f"/bin/bash /home/jakubner/programowanie/projekty/Auto-meetings/scripts/auth.sh"))
+    except Exception as e:
+        logging.error(e)
     except BadRequestKeyError:
         ...
 

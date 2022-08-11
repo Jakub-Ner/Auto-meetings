@@ -1,3 +1,5 @@
+import logging
+
 from flask import Blueprint, request
 from flask.helpers import flash
 import random
@@ -40,7 +42,7 @@ def home(meetings):
                 flash("Meeting added", category="success")
         except BadRequestKeyError: ...
         except Exception as e:
-            print(e)
+            logging.error(e)
 
 
 

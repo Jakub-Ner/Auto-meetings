@@ -1,4 +1,5 @@
-import os
+import logging
+
 from .TOP_SECRET import PASS, MY_MAIL
 import imaplib
 import email
@@ -52,7 +53,7 @@ class Mail:
                             return words[i], date
 
                 except:
-                    os.system('echo "ERROR: Invalid date format in mail! from {}"'.format(self.email_from))
+                    logging.error(f'echo "ERROR: Invalid date format in mail! from {self.email_from}"')
 
         return "", []
 

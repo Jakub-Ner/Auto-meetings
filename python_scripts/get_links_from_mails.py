@@ -1,7 +1,7 @@
 import json
 import os
 import time
-
+import logging
 from .Mail import Mail
 from .manage_dates import convert_months_to_numbers, prepare_next_meeting
 
@@ -20,7 +20,7 @@ def search_meetings_periodically():
 
 
 def search_meetings():
-    os.system('echo start searching')
+    logging.info('echo start searching')
     # if file didn't exist a+ creates it
     with open(MEETINGS_PATH, "a+") as file:
         # if file is empty give necessary data
@@ -73,10 +73,10 @@ def search_meetings():
 
         M.end()
     except:
-        os.system('echo "ERROR: Lack of internet connection!"')
+        logging.error('echo "ERROR: Lack of internet connection!"')
 
     meetings.update(disposable_meetings)
-    os.system(f'echo {len(meetings)}')
+    logging.info(f'echo {len(meetings)}')
 
     prepare_next_meeting(meetings)
 
