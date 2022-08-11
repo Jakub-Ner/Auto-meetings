@@ -4,3 +4,5 @@ variables/meetings.json
 variables/next_meeting.json
 **/__pycache__/
 **/.idea/
+/scripts/automeetings.service
+/scripts/auto-meetings
