@@ -1,12 +1,16 @@
 #!/bin/bash
-source CONST.sh
+#
+SCRIPT=$(readlink -f "$0")
+SCRIPT_PATH=$(dirname "$SCRIPT")
 #
 sudo rm /etc/systemd/system/automeetings.service
 systemctl daemon-reload
 systemctl disable automeetings
 systemctl stop automeetings
 #
-sudo userdel ${NAME}
-sudo rm /etc/sudoers.d/${NAME}
-sudo rm ${TOP_SECRET_DIR}
-unalias ${NAME}
+sudo userdel auto-meetings
+#
+sudo rm ${SCRIPT_PATH}/auto-meetings
+sudo rm ${SCRIPT_PATH}/automeetings.service
+sudo rm ${SCRIPT_PATH}/../python_scripts/TOP_SECRET.py
+sudo rm /etc/sudoers.d/auto-meetings
