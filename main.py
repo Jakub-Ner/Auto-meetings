@@ -1,4 +1,7 @@
 import threading
+import os
+
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from website import create_app
 from browser.Browser import Browser

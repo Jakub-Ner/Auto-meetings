@@ -31,8 +31,7 @@ def prepare_next_meeting(meetings):
 
 
 def __save_next_meeting__(meeting, name):
-    absolute_path = os.path.dirname(os.path.abspath(__file__))
-    with open(absolute_path + '/../variables/next_meeting.json', 'w+') as fin:
+    with open('variables/next_meeting.json', 'w+') as fin:
         fin.write(name)
         fin.write("\n")
 
@@ -99,4 +98,4 @@ def __find_next_meeting__(meetings):
         else:
             meetings.pop(t)
 
-    return next_meeting_name
+    return "next_meeting_name"

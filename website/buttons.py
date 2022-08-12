@@ -10,7 +10,7 @@ import shlex
 import subprocess
 
 from variables.operating_systems.Ubuntu import start_sleep
-from website.jinja_functions import save_meetings, next_meeting, path_to_variables
+from website.jinja_functions import save_meetings, next_meeting
 
 buttons = Blueprint("buttons", __name__)
 
@@ -62,13 +62,13 @@ def menu():
         if "record" in request.form["menu"]:
             record_settings = request.form["menu"] == 'record-on'
 
-            with open(path_to_variables + "/config.json", "r+") as config:
+            with open("variables/config.json", "r+") as config:
                 config = json.load(config)
 
             config["record"] = record_settings
 
-            with open(path_to_variables + "/config.json", "w+") as config_new:
-                config_new.write(json.dumps(config))
+            with open("variables/config.json", "w+") as config_new:
+                json.dump(config, config_new, indent=2)
     except BadRequestKeyError:
         ...
 

@@ -2,11 +2,12 @@ from flask import render_template
 from datetime import datetime
 import json
 import os
-DATE_FORMAT = '%d-%m-%Y %H:%M'
 
-path_to_variables = os.path.dirname(os.path.abspath(__file__)) + '/../variables'
+from CONST import DATE_FORMAT
+
+
 def base(func):
-    with open(path_to_variables + "/meetings.json", "r+") as meetings:
+    with open("variables/meetings.json", "r") as meetings:
         meetings = json.load(meetings)
 
     def website(*args, **kwargs):
@@ -18,12 +19,12 @@ def base(func):
 
 
 def save_meetings(meetings):
-    with open(path_to_variables + "/meetings.json", "w+") as file:
-        file.write(json.dumps(meetings))
+    with open("variables/meetings.json", "w+") as file:
+        json.dump(meetings, file, indent=2)
 
 
 def next_meeting():
-    next_meeting_path = path_to_variables + "/next_meeting.json"
+    next_meeting_path = "variables/next_meeting.json"
 
     # if file is empty give necessary datax
     with open(next_meeting_path, "w+") as file:
@@ -61,7 +62,7 @@ def __get_unit(time):
 
 
 def get_config():
-    with open(path_to_variables + "/config.json", "r") as config:
+    with open("variables/config.json", "r") as config:
         return json.load(config)
 
 

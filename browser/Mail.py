@@ -32,9 +32,9 @@ class Mail:
             state, response_part = data
             message = str(email.message_from_string(str(response_part[0][1], "utf-8")).get_payload(0))
             link, date = self.__find_data(message)
-            if link:
-                links.append(link)
 
+            if link and date:
+                links.append(link)
                 dates.append(date)
         return links, dates
 

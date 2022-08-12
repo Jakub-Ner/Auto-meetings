@@ -29,11 +29,11 @@ Beside that:
 1. Install python If You don't have: `sudo apt install python3` <p>
 1. Open `Auto-meetings/scripts/` directory in terminal  <p>
 1. Give the installer permission to execute: `chmod +x ./install.sh` <p>
-1. Run installer: `./install.sh` <p>
+1. Run installer: `sudo ./install.sh` <p>
 
 ## UnInstall for Ubuntu:
 1. Open `Auto-meetings/scripts/` directory in terminal  <p>
-1. Run: `./uninstall`
+1. Run: `sudo ./uninstall`
 1. Remove alias: `unalias auto-meetings`
 
 ## Set up for obs-studio
