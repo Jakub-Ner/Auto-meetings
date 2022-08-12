@@ -44,42 +44,6 @@ def __save_next_meeting__(meeting, name):
         fin.write(meeting["link"])
 
 
-def __check_if_meeting_isnt_old(date):
-    import time
-    now = time.localtime()
-
-    # year
-    if date[2] > now.tm_year:
-        return True
-    elif date[2] < now.tm_year:
-        return False
-
-    # month
-    if date[1] > now.tm_mon:
-        return True
-    elif date[1] < now.tm_mon:
-        return False
-
-    # day
-    if date[0] > now.tm_mday:
-        return True
-    elif date[0] < now.tm_mday:
-        return False
-
-    # hour, I let being late 1 hour
-    if int(date[3][0:2]) + 1 >= now.tm_hour:
-        return True
-    return False
-
-
-def compare(date, next_meeting_date):
-    if date < next_meeting_date:
-        return 1
-    if date > next_meeting_date:
-        return -1
-    return 0
-
-
 def __find_next_meeting__(meetings):
     next_meeting_name = "@"  # <- empty meeting
     trash = []

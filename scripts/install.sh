@@ -35,7 +35,7 @@ echo -e "\n Installing python dependencies\n"
 sudo -H pip install -r ${SCRIPT_PATH}/dependencies.txt
 #
 echo -e "\n Protection for credentials:\n"
-TOP_SECRET_DIR=${SCRIPT_PATH}/../python_scripts/TOP_SECRET.py
+TOP_SECRET_DIR=${SCRIPT_PATH}/../browser/TOP_SECRET.py
 sudo echo -e 'PASS=""\nMY_MAIL=""' > ${TOP_SECRET_DIR}
 sudo chmod 700 ${TOP_SECRET_DIR}
 sudo setfacl -m u:auto-meetings:rwx ${TOP_SECRET_DIR}

@@ -76,11 +76,15 @@
 
         <header class="major" margin-bottom="100px">
             <a><h3 style="color:grey">Details of the next meeting</h3>
-                    {% set time, unit, name, link = next_meeting() %}
-                    Next meeting starts at:  {{ time }} {{ unit }} <br>
-                    It is named: {{ name }} <br>
-                    Link: {{ link }}
-
+                    {% with code, next = next_meeting() %}
+                        {% if code == 200 %}
+                            Next meeting starts at:  {{ next[0] }} {{ next[1] }} <br>
+                            It is named: {{ next[2] }} <br>
+                            Link: {{ next[3] }}
+                        {% else %}
+                            {{ next }}
+                        {% endif %}
+                    {% endwith %}
             </a>
         </header>
 

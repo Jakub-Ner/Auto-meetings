@@ -7,15 +7,16 @@ import email
 
 class Mail:
     def __init__(self):
-        self.MY_EMAIL = MY_MAIL
-        self.MY_PASS = PASS
         self.SMTP_PORT = 993
         self.SMTP_SERVER = "imap.gmail.com"
-
         self.mail = imaplib.IMAP4_SSL(self.SMTP_SERVER)
-        self.mail.login(self.MY_EMAIL, self.MY_PASS)
-
         self.email_from = ""
+
+    def log_in(self):
+        if MY_MAIL and PASS:
+            self.mail.login(MY_MAIL, PASS)
+            return True
+        return False
 
     def read_mails(self, email_from):
         self.email_from = email_from

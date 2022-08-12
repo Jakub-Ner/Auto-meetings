@@ -44,7 +44,12 @@ def menu():
 
     try:
         if request.form["menu"] == "sleep":
-            sleeping_time, _, _, _ = next_meeting()
+            next = next_meeting()
+
+            if type(next) != tuple:
+                sleeping_time = 10 * 60 * 60
+            else:
+                sleeping_time, _, _, _ = next
 
             flash(f"Computer will hibernate and wake up after around {sleeping_time} minutes")
             sleeping_thread = Thread(target=sleep, args=(sleeping_time,))

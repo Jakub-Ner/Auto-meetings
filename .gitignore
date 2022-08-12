@@ -1,5 +1,5 @@
-python_scripts/TOP_SECRET.py
-python_scripts/TOP_SECRET_TEST.py
+browser/TOP_SECRET.py
+browser/TOP_SECRET_TEST.py
 variables/meetings.json
 variables/next_meeting.json
 **/__pycache__/

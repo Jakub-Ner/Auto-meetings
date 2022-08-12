@@ -23,15 +23,26 @@ def save_meetings(meetings):
 
 
 def next_meeting():
-    with open(path_to_variables + "/next_meeting.json", "r") as meeting:
+    next_meeting_path = path_to_variables + "/next_meeting.json"
+
+    # if file is empty give necessary datax
+    with open(next_meeting_path, "w+") as file:
+        if os.stat(next_meeting_path).st_size == 0:
+            json.dump({}, file)
+
+    with open(next_meeting_path, "r") as meeting:
         meeting = json.load(meeting)
-        name = list(meeting.keys())[0]
-        meeting_start = date = datetime.strptime(meeting[name]["date"], '%d-%m-%Y %H:%M')
+
+    if not meeting:
+        return 404, "There is no any meeting"
+
+    name = list(meeting.keys())[0]
+    meeting_start = datetime.strptime(meeting[name]["date"], '%d-%m-%Y %H:%M')
 
     current_time = datetime.now()
     time_to_start = round((meeting_start - current_time).total_seconds() / 60.0)
     time_to_start, unit = __get_unit(time_to_start)
-    return time_to_start, unit, name[:-4], meeting[name]["link"]
+    return 200, (time_to_start, unit, name[:-4], meeting[name]["link"])
 
 
 def __get_unit(time):
