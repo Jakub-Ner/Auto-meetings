@@ -5,19 +5,18 @@ import logging
 from .Mail import Mail
 from .manage_dates import convert_months_to_numbers, prepare_next_meeting
 
-VARIABLES_PATH = os.path.dirname(os.path.abspath(__file__)) + f"/../variables/"
-
 
 class Browser:
     def __init__(self):
-        with open(VARIABLES_PATH + "meetings.json", "w+") as file:
+        meetings_path = "variables/meetings.json"
+        with open(meetings_path, "w+") as file:
             # if file is empty give necessary data
-            if os.stat(VARIABLES_PATH + "meetings.json").st_size == 0:
+            if os.stat(meetings_path).st_size == 0:
                 json.dump({}, file, indent=2)
                 self.__meetings = {}
 
             else:
-                with open(VARIABLES_PATH + "meetings.json", "r") as data:
+                with open(meetings_path, "r") as data:
                     self.__meetings = json.load(data)
 
     def search_meetings_periodically(self):
@@ -61,7 +60,7 @@ class Browser:
         self.__meetings.update(disposable_meetings)
         prepare_next_meeting(self.__meetings)
 
-        with open(VARIABLES_PATH + "meetings.json", "w") as data:
+        with open("variables/meetings.json", "w") as data:
             json.dump(self.__meetings, data, indent=2)
 
     def get_emails(self):
