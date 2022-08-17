@@ -10,7 +10,7 @@ function CREATE_SUDOERS() {
   echo "auto-meetings ALL=(ALL) NOPASSWD: SLEEP"             | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
 }
 function CREATE_UNIT_FILE() {
-  UNIT_PATH=${SCRIPT_PATH}/automeetings.service
+  UNIT_PATH=${SCRIPT_PATH}/auto-meetings.service
 
   echo "[Unit]" > ${UNIT_PATH}
   echo "Description=Auto-meetings" | tee -a ${UNIT_PATH}
@@ -53,10 +53,10 @@ sudo cp ${SCRIPT_PATH}/auto-meetings /etc/sudoers.d/auto-meetings
 #
 echo -e "\n Setting up auto-meetings as a systemd service:\n"
 CREATE_UNIT_FILE
-sudo cp ${SCRIPT_PATH}/automeetings.service /etc/systemd/system/automeetings.service
+sudo cp ${SCRIPT_PATH}/auto-meetings.service /etc/systemd/system/auto-meetings.service
 systemctl daemon-reload
-systemctl enable automeetings
-systemctl start automeetings
+systemctl enable auto-meetings
+systemctl start auto-meetings
 #
 #
 echo -e "\n Adding auto-meetings alias:\n"
