@@ -6,8 +6,8 @@ MAIN_PATH=$(builtin cd ${SCRIPT_PATH}/../; pwd)
 #
 function CREATE_SUDOERS() {
   echo "auto-meetings ALL=(ALL) NOPASSWD: /bin/bash ${SCRIPT_PATH}/auth.sh" > ${SCRIPT_PATH}/auto-meetings
-  echo "Cmnd_Alias SLEEP = /usr/sbin/rtcwake -u -m mem -s *" | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
-  echo "auto-meetings ALL=(ALL) NOPASSWD: SLEEP"             | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
+  echo "Cmnd_Alias SLEEP = /usr/sbin/rtcwake -u -m mem -s *"                           | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
+  echo "auto-meetings ALL=(ALL) NOPASSWD: SLEEP"                                       | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
 }
 function CREATE_UNIT_FILE() {
   UNIT_PATH=${SCRIPT_PATH}/auto-meetings.service

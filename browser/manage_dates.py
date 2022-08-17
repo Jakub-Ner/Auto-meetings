@@ -42,6 +42,7 @@ def __save_next_meeting__(meeting, name):
 
         fin.write(meeting["link"])
 
+def past_date(date):
 
 def __find_next_meeting__(meetings):
     next_meeting_name = "@"  # <- empty meeting
@@ -49,8 +50,7 @@ def __find_next_meeting__(meetings):
 
     for meeting in meetings:
 
-        if (meetings[meeting]["date"] == []) or \
-                ((meeting != '@') and (not __check_if_meeting_isnt_old(meetings[meeting]["date"]))):
+        if  not __check_if_meeting_isnt_old(meetings[meeting]["date"]):
             trash.append(meeting)
 
         else:

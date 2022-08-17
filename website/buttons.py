@@ -35,8 +35,8 @@ import logging
 def menu():
     try:
         if request.form["menu"] == "sign-up":
-            subprocess.run(
-                shlex.split(f"/bin/bash /home/jakubner/programowanie/projekty/Auto-meetings/scripts/auth.sh"))
+
+            subprocess.run(shlex.split(f"/bin/bash {os.getcwd()}/scripts/auth.sh"))
     except Exception as e:
         logging.error(e)
     except BadRequestKeyError:
@@ -44,9 +44,9 @@ def menu():
 
     try:
         if request.form["menu"] == "sleep":
-            next = next_meeting()
+            code, next = next_meeting()
 
-            if type(next) != tuple:
+            if code != 200:
                 sleeping_time = 10 * 60 * 60
             else:
                 sleeping_time, _, _, _ = next
