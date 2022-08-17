@@ -10,6 +10,7 @@ from .manage_dates import convert_months_to_numbers, prepare_next_meeting
 
 class Browser:
     def __init__(self):
+        logging.error(os.getcwd())
         meetings_path = "variables/meetings.json"
         with open(meetings_path, "a+") as file:
             # if file is empty give necessary data
