@@ -43,6 +43,7 @@ TOP_SECRET_DIR=${MAIN_PATH}/browser/TOP_SECRET.py
 sudo echo -e 'PASS=""\nMY_MAIL=""' > ${TOP_SECRET_DIR}
 sudo chmod 700 ${TOP_SECRET_DIR}
 sudo setfacl -m u:auto-meetings:rwx ${TOP_SECRET_DIR}
+sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/variables
 #
 sudo chown root:root ${SCRIPT_PATH}/auth.sh
 sudo chmod 106 ${SCRIPT_PATH}/auth.sh
