@@ -64,3 +64,6 @@ echo -e "\n Adding auto-meetings alias:\n"
 sudo echo 'alias auto-meetings="xdg-open http://127.0.0.1:5000/"' | sudo tee -a ~/.bash_aliases > /dev/null
 chmod +220 ~/.bash_aliases # in case file was created during the script
 . /home/jakubner/.bashrc
+#
+python3 {MAIN_PATH}/browser/Mail.py
+echo -e "\n Installation finished!\n"

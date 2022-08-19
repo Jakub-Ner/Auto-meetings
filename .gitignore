@@ -1,8 +1,7 @@
-browser/TOP_SECRET.py
-browser/TOP_SECRET_TEST.py
 variables/meetings.json
 variables/next_meeting.json
 **/__pycache__/
 **/.idea/
 /scripts/auto-meetings.service
 /scripts/auto-meetings
+browser/credentials/*
