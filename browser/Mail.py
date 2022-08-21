@@ -60,7 +60,7 @@ class Mail:
             name = values['name']
             if name == 'From':
                 from_name = values['value']
-                logging.info(f'echo "INFO: Reading email from {from_name}"')
+                logging.info(f'INFO: Reading email from {from_name}')
 
                 for part in msg['payload']['parts']:
                     try:

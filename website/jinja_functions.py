@@ -24,14 +24,14 @@ def save_meetings(meetings):
 
 
 def next_meeting():
-    next_meeting_path = "variables/next_meeting.json"
+    meetings_path = "variables/meetings.json"
 
     # if file is empty give necessary datax
-    with open(next_meeting_path, "w+") as file:
-        if os.stat(next_meeting_path).st_size == 0:
+    with open(meetings_path, "w+") as file:
+        if os.stat(meetings_path).st_size == 0:
             json.dump({}, file)
 
-    with open(next_meeting_path, "r") as meeting:
+    with open(meetings_path, "r") as meeting:
         meeting = json.load(meeting)
 
     if not meeting:

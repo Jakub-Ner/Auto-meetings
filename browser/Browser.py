@@ -5,12 +5,9 @@ import logging
 import random
 
 from .Mail import Mail
-from .manage_dates import convert_months_to_numbers, prepare_next_meeting
-
 
 class Browser:
     def __init__(self):
-        logging.error(os.getcwd())
         meetings_path = "variables/meetings.json"
         with open(meetings_path, "a+") as file:
             # if file is empty give necessary data
@@ -28,7 +25,7 @@ class Browser:
             time.sleep(3 * 60 * 60)
 
     def search_meetings(self):
-        logging.info('echo start searching')
+        logging.info('start searching')
         disposable_meetings = {}
 
         mailbox = Mail()
@@ -37,7 +34,7 @@ class Browser:
 
         try:
             for email in self.get_emails():
-                urls, dates = mailbox.read_mails(email)
+                urls, dates = mailbox.extract_data_from_mail(email)
 
                 for i in range(len(urls)):
                     name = email + str(random.randint(1000, 10000))
@@ -48,12 +45,10 @@ class Browser:
                         }
                     })
 
-            mailbox.log_out()
         except:
-            logging.error('echo "ERROR: Lack of internet connection!"')
+            logging.error('ERROR: Lack of internet connection!')
 
         self.__meetings.update(disposable_meetings)
-        prepare_next_meeting(self.__meetings)
 
         with open("variables/meetings.json", "w") as data:
             json.dump(self.__meetings, data, indent=2)
