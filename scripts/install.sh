@@ -5,7 +5,6 @@ SCRIPT_PATH=$(dirname "${SCRIPT}")
 MAIN_PATH=$(builtin cd ${SCRIPT_PATH}/../; pwd)
 #
 function CREATE_SUDOERS() {
-  echo "auto-meetings ALL=(ALL) NOPASSWD: /bin/bash ${SCRIPT_PATH}/auth.sh" > ${SCRIPT_PATH}/auto-meetings
   echo "Cmnd_Alias SLEEP = /usr/sbin/rtcwake -u -m mem -s *"                           | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
   echo "auto-meetings ALL=(ALL) NOPASSWD: SLEEP"                                       | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
 }
@@ -40,10 +39,6 @@ sudo -H pip install -r ${SCRIPT_PATH}/dependencies.txt
 #
 
 echo -e "\n Protection for credentials:\n"
-TOP_SECRET_DIR=${MAIN_PATH}/browser/TOP_SECRET.py
-sudo echo -e 'PASS=""\nMY_MAIL=""' > ${TOP_SECRET_DIR}
-sudo chmod 700 ${TOP_SECRET_DIR}
-sudo setfacl -m u:auto-meetings:rwx ${TOP_SECRET_DIR}
 sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/variables
 mkdir ${MAIN_PATH}/browser/credentials
 sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/browser/credentials
@@ -68,5 +63,5 @@ sudo echo 'alias auto-meetings="xdg-open http://127.0.0.1:5000/"' | sudo tee -a 
 chmod +220 ~/.bash_aliases # in case file was created during the script
 . /home/jakubner/.bashrc
 #
-python3 {MAIN_PATH}/browser/Mail.py
+python3 ${MAIN_PATH}/browser/Mail.py
 echo -e "\n Installation finished!\n"

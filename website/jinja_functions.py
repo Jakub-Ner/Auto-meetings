@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 import os
 
-from CONST import DATE_FORMAT
+from Global import config
 
 
 def base(func):
@@ -37,15 +37,16 @@ def next_meeting():
     if not meeting:
         return 404, "There is no any meeting"
 
-    name = list(meeting.keys())[0]
+    name = list(meeting.keys())[0]  # <- get first meeting
     meeting_start = datetime.strptime(meeting[name]["date"], '%d-%m-%Y %H:%M')
 
     current_time = datetime.now()
     time_to_start = round((meeting_start - current_time).total_seconds() / 60.0)
+
     time_to_start, unit = __get_unit(time_to_start)
     return 200, (time_to_start, unit, name[:-4], meeting[name]["link"])
 
-# def run_meeting
+
 def __get_unit(time):
     if time == 1:
         return time, "minute"
@@ -68,7 +69,7 @@ def get_config():
 
 def validate(date):
     try:
-        date = datetime.strptime(date, DATE_FORMAT)
+        date = datetime.strptime(date, config["DATE_FORMAT"])
         return date
     except:
         return False

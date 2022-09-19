@@ -6,11 +6,10 @@ from flask.helpers import flash
 from werkzeug.exceptions import BadRequestKeyError
 from threading import Thread
 import json
-import shlex
-import subprocess
 
 from variables.operating_systems.Ubuntu import start_sleep
 from website.jinja_functions import save_meetings, next_meeting
+from Global import browser
 
 buttons = Blueprint("buttons", __name__)
 
@@ -34,9 +33,10 @@ import logging
 # @base
 def menu():
     try:
-        if request.form["menu"] == "sign-up":
+        if request.form["menu"] == "synchronize":
+            browser.search_meetings_periodically()
+            flash("Synchronization started", category="success")
 
-            subprocess.run(shlex.split(f"/bin/bash {os.getcwd()}/scripts/auth.sh"))
     except Exception as e:
         logging.error(e)
     except BadRequestKeyError:

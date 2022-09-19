@@ -4,9 +4,10 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+from google.auth.exceptions import RefreshError
 import logging
 
-from browser.Miner import Miner
+from .Miner import Miner
 
 
 class Mail:
@@ -22,8 +23,11 @@ class Mail:
 
         if not self.creds or not self.creds.valid:
             if self.creds and self.creds.expired and self.creds.refresh_token:
-                self.creds.refresh(Request())
-
+                try:
+                    self.creds.refresh(Request())
+                except RefreshError as error:
+                    logging.error(str(error))
+                    self.__authorize()
             else:
                 self.__authorize()
 
@@ -72,8 +76,12 @@ class Mail:
                         pass
 
     def __authorize(self):
-        flow = InstalledAppFlow.from_client_secrets_file(f'browser/credentials/credentials.json', self.SCOPES)
-        self.creds = flow.run_local_server(port=0)
+        credentials_path = 'browser/credentials/credentials.json'
+        if os.path.exists(credentials_path):
+            flow = InstalledAppFlow.from_client_secrets_file(f'browser/credentials/credentials.json', self.SCOPES)
+            self.creds = flow.run_local_server(port=0)
+        else:
+            logging.error(f'ERROR: {credentials_path} is missing! Please contact kubaner1@gmail.com in order to get it.')
 
 
 if __name__ == '__main__':

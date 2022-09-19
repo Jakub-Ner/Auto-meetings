@@ -4,7 +4,10 @@ import time
 import logging
 import random
 
+from Global import config
 from .Mail import Mail
+from MeetingsOpener import meeting_opener
+
 
 class Browser:
     def __init__(self):
@@ -25,6 +28,13 @@ class Browser:
             time.sleep(3 * 60 * 60)
 
     def search_meetings(self):
+        if config["searching_flag"]:
+            logging.info('Searching mode already on')
+            return
+
+        logging.info('Started searching now')
+        config["searching_flag"] = True
+
         logging.info('start searching')
         disposable_meetings = {}
 
@@ -52,6 +62,11 @@ class Browser:
 
         with open("variables/meetings.json", "w") as data:
             json.dump(self.__meetings, data, indent=2)
+
+        name_of_next = list(self.__meetings.keys())[0]
+        meeting_opener.check_meetings(__meetings[name_of_next])
+        config["searching_flag"] = True
+        logging.info('Finished searching')
 
     def get_emails(self):
         emails = []

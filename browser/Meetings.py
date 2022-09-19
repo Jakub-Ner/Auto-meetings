@@ -1,6 +1,6 @@
 import logging
 
-from Meeting import Meeting, MeetingEncoder
+from .Meeting import Meeting, MeetingEncoder
 import json
 from datetime import datetime
 
