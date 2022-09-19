@@ -38,12 +38,15 @@ sudo useradd auto-meetings
 echo -e "\n Installing python dependencies\n"
 sudo -H pip install -r ${SCRIPT_PATH}/dependencies.txt
 #
+
 echo -e "\n Protection for credentials:\n"
 TOP_SECRET_DIR=${MAIN_PATH}/browser/TOP_SECRET.py
 sudo echo -e 'PASS=""\nMY_MAIL=""' > ${TOP_SECRET_DIR}
 sudo chmod 700 ${TOP_SECRET_DIR}
 sudo setfacl -m u:auto-meetings:rwx ${TOP_SECRET_DIR}
 sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/variables
+mkdir ${MAIN_PATH}/browser/credentials
+sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/browser/credentials
 #
 sudo chown root:root ${SCRIPT_PATH}/auth.sh
 sudo chmod 106 ${SCRIPT_PATH}/auth.sh
