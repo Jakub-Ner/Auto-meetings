@@ -3,9 +3,8 @@ import os
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-from Global import browser
-
-from website import create_app, next_meeting
+from browser import browser
+from website import create_app
 
 app = create_app()
 

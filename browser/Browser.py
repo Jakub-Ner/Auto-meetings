@@ -4,9 +4,9 @@ import time
 import logging
 import random
 
-from Global import config
+from config import config
 from .Mail import Mail
-from MeetingsOpener import meeting_opener
+from .MeetingsOpener import meeting_opener
 
 
 class Browser:
@@ -64,7 +64,7 @@ class Browser:
             json.dump(self.__meetings, data, indent=2)
 
         name_of_next = list(self.__meetings.keys())[0]
-        meeting_opener.check_meetings(__meetings[name_of_next])
+        meeting_opener.check_meeting(self.__meetings[name_of_next])
         config["searching_flag"] = True
         logging.info('Finished searching')
 

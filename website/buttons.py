@@ -9,7 +9,7 @@ import json
 
 from variables.operating_systems.Ubuntu import start_sleep
 from website.jinja_functions import save_meetings, next_meeting
-from Global import browser
+from browser import browser
 
 buttons = Blueprint("buttons", __name__)
 
@@ -34,7 +34,7 @@ import logging
 def menu():
     try:
         if request.form["menu"] == "synchronize":
-            browser.search_meetings_periodically()
+            browser.search_meetings()
             flash("Synchronization started", category="success")
 
     except Exception as e:

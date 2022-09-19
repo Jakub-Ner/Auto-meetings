@@ -7,7 +7,8 @@ import random
 from werkzeug.exceptions import BadRequestKeyError
 
 from .buttons import menu, delete
-from .jinja_functions import base, validate, DATE_FORMAT, save_meetings
+from .jinja_functions import base, validate, save_meetings
+from config import config
 
 website = Blueprint("views", __name__)
 
@@ -32,7 +33,7 @@ def home(meetings):
                 name = request.form["name"] + str(random.randint(1000, 10000))
 
                 try:
-                    date = str(date.strftime(DATE_FORMAT))
+                    date = str(date.strftime(config["DATE_FORMAT"]))
                 except: ...
 
                 new_meeting = {name: {"date": date, "link": request.form["link"]}}
