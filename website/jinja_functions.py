@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 import os
 
-from Global import config
+from config import config
 
 
 def base(func):
