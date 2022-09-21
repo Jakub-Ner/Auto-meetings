@@ -16,7 +16,7 @@ class Opener:
         self.waiting_thread = Process(target=self.__wait_for_meeting)
 
     def check_meeting(self, meeting: Meeting):
-        if meeting == self.next_meeting:
+        if meeting == self.next_meeting or meeting is None:
             return False
 
         self.next_meeting = meeting

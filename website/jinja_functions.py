@@ -3,7 +3,7 @@ from datetime import datetime
 import json
 import os
 
-from config import config
+from variables.config import config
 
 
 def base(func):
@@ -63,8 +63,7 @@ def __get_unit(time):
 
 
 def get_config():
-    with open("variables/config.json", "r") as config:
-        return json.load(config)
+    return config
 
 
 def validate(date):

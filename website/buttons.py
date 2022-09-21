@@ -10,6 +10,7 @@ import json
 from variables.operating_systems.Ubuntu import start_sleep
 from website.jinja_functions import save_meetings, next_meeting
 from browser import browser
+from variables.config import config
 
 buttons = Blueprint("buttons", __name__)
 
@@ -61,14 +62,8 @@ def menu():
     try:
         if "record" in request.form["menu"]:
             record_settings = request.form["menu"] == 'record-on'
-
-            with open("variables/config.json", "r+") as config:
-                config = json.load(config)
-
             config["record"] = record_settings
 
-            with open("variables/config.json", "w+") as config_new:
-                json.dump(config, config_new, indent=2)
     except BadRequestKeyError:
         ...
 

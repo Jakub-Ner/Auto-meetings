@@ -6,6 +6,12 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 from browser import browser
 from website import create_app
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+
 app = create_app()
 
 if __name__ == "__main__":

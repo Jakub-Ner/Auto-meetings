@@ -1,3 +1,3 @@
-from .Browser import Browser
+from browser.Browser import Browser
 
 browser = Browser()

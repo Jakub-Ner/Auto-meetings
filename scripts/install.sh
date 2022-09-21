@@ -43,9 +43,6 @@ sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/variables
 mkdir ${MAIN_PATH}/browser/credentials
 sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/browser/credentials
 #
-sudo chown root:root ${SCRIPT_PATH}/auth.sh
-sudo chmod 106 ${SCRIPT_PATH}/auth.sh
-#
 CREATE_SUDOERS
 sudo cp ${SCRIPT_PATH}/auto-meetings /etc/sudoers.d/auto-meetings
 #
@@ -63,5 +60,6 @@ sudo echo 'alias auto-meetings="xdg-open http://127.0.0.1:5000/"' | sudo tee -a 
 chmod +220 ~/.bash_aliases # in case file was created during the script
 . /home/jakubner/.bashrc
 #
-python3 ${MAIN_PATH}/browser/Mail.py
+python3 ${MAIN_PATH}/browser/Auth.py
+sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/browser/credentials
 echo -e "\n Installation finished!\n"

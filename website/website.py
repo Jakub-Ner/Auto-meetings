@@ -8,7 +8,7 @@ from werkzeug.exceptions import BadRequestKeyError
 
 from .buttons import menu, delete
 from .jinja_functions import base, validate, save_meetings
-from config import config
+from variables.config import config
 
 website = Blueprint("views", __name__)
 

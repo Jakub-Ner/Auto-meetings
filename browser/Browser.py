@@ -4,7 +4,7 @@ import time
 import logging
 import random
 
-from config import config
+from variables.config import config
 from .Mail import Mail
 from .MeetingsOpener import meeting_opener
 
@@ -29,13 +29,12 @@ class Browser:
 
     def search_meetings(self):
         if config["searching_flag"]:
-            logging.info('Searching mode already on')
+            logging.debug('Searching mode already on')
             return
 
-        logging.info('Started searching now')
         config["searching_flag"] = True
+        logging.debug('started searching now')
 
-        logging.info('start searching')
         disposable_meetings = {}
 
         mailbox = Mail()
@@ -66,7 +65,7 @@ class Browser:
         name_of_next = list(self.__meetings.keys())[0]
         meeting_opener.check_meeting(self.__meetings[name_of_next])
         config["searching_flag"] = True
-        logging.info('Finished searching')
+        logging.debug('Finished searching')
 
     def get_emails(self):
         emails = []
