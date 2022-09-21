@@ -1,21 +1,17 @@
 import logging
-
-from .Meeting import Meeting, MeetingEncoder
 import json
 from datetime import datetime
+
+from .Meeting import Meeting, MeetingEncoder
 
 
 class Meetings:
     def __init__(self, first: Meeting = None):
-        self.__first = self.__last = first
+        self.__first = first
         if first is not None:
             self.size = 1
         else:
             self.size = 0
-
-    @property
-    def last(self):
-        return self.__last
 
     @property
     def first(self):
@@ -23,6 +19,12 @@ class Meetings:
 
     def to_json(self):
         return json.dumps(self.__first, cls=MeetingEncoder, indent=3)
+
+    @classmethod
+    def from_json(cls, meetings_json):
+        meeting_dict = json.loads(meetings_json)
+        meeting = Meeting(**meeting_dict)
+        return cls(meeting)
 
     def pop(self):
         if self.__first is None:
@@ -32,16 +34,13 @@ class Meetings:
         meeting = self.__first
         self.__first = self.__first.next
 
-        if self.__last == meeting:
-            self.__last = None
-
         self.size -= 1
         return meeting
 
     def add(self, meeting: Meeting):
         self.size += 1
         if self.__first is None:
-            self.__first, self.__last = meeting
+            self.__first = meeting
             return
 
         prev = self.__binsearch(meeting)
@@ -65,9 +64,6 @@ class Meetings:
                 last_idx = mid_idx - 1
                 mid_idx = (last_idx + first_idx) // 2
                 mid_meeting = self.__further(self.__first, mid_idx)
-
-        if mid_idx == self.size - 2:
-            self.__last = meeting
 
         return mid_meeting
 
@@ -100,5 +96,7 @@ if __name__ == '__main__':
     meetings.add(m9)
     meetings.add(m10)
 
-    print(meetings.to_json())
+    meetings_json = meetings.to_json()
+    obj = Meetings.from_json(meetings_json)
+
     print(meetings.last.date)

@@ -32,8 +32,11 @@ if __name__ == '__main__':
 
     meeting_json = json.dumps(meeting, cls=MeetingEncoder)
 
+    print(meeting_json)
+
     meeting_dict = json.loads(meeting_json)
 
     meeting_obj = Meeting(**meeting_dict)
+    print(meeting_obj)
 
     print(meeting_obj.date)
