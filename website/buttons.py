@@ -5,8 +5,8 @@ from flask import Blueprint, request
 from flask.helpers import flash
 from werkzeug.exceptions import BadRequestKeyError
 from threading import Thread
-import json
 
+from browser.Meetings import Meetings
 from variables.operating_systems.Ubuntu import start_sleep
 from website.jinja_functions import save_meetings, next_meeting
 from browser import browser
@@ -17,9 +17,10 @@ buttons = Blueprint("buttons", __name__)
 
 # @buttons.route("/delete", methods=['POST'])
 # @base
-def delete(meetings):
+def delete(meetings: Meetings):
     try:
-        meetings.pop(request.form["delete"])
+        meetings.remove(request.form["delete"])
+        logging.debug("meeting deleted")
         save_meetings(meetings)
         flash("Meeting deleted", category="success")
 

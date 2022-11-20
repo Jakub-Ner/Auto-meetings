@@ -17,14 +17,49 @@ class Meetings:
     def first(self):
         return self.__first
 
+    def to_list(self):
+        if self.__first is None:
+            return []
+
+        meetings_list = []
+        next_meeting = self.to_json().copy()
+        while next_meeting is not None:
+            meeting = next_meeting
+            next_meeting = meeting.pop('next')
+            meetings_list.append(meeting)
+        return meetings_list
+
     def to_json(self):
-        return json.dumps(self.__first, cls=MeetingEncoder, indent=3)
+        return json.loads(json.dumps(self.__first, cls=MeetingEncoder, indent=3))
 
     @classmethod
     def from_json(cls, meetings_json):
-        meeting_dict = json.loads(meetings_json)
-        meeting = Meeting(**meeting_dict)
+        if not meetings_json:
+            return cls()
+
+        meeting = Meeting(**meetings_json)
         return cls(meeting)
+
+    def remove(self, name):
+        logging.debug(f"Removing meeting: name={name}")
+        if self.__first is None:
+            logging.debug('Trying to remove from empty meetings list')
+            return
+
+        if self.__first.name == name:
+            self.__first = self.__first.next
+            self.size -= 1
+            return
+
+        prev = self.__first
+        while prev.next is not None:
+            if prev.next.name == name:
+                prev.next = prev.next.next
+                self.size -= 1
+                return
+            prev = prev.next
+
+        logging.error(f'No meeting with name {name} found')
 
     def pop(self):
         if self.__first is None:
@@ -36,6 +71,11 @@ class Meetings:
 
         self.size -= 1
         return meeting
+
+    def add_many(self, meetings: list):
+        for meeting_dict in meetings:
+            meeting = Meeting(**meeting_dict)
+            self.add(meeting)
 
     def add(self, meeting: Meeting):
         self.size += 1
@@ -97,6 +137,9 @@ if __name__ == '__main__':
     meetings.add(m10)
 
     meetings_json = meetings.to_json()
-    obj = Meetings.from_json(meetings_json)
-
-    print(meetings.last.date)
+    print(meetings_json, type(meetings_json))
+    # meetings_list = meetings.to_list()
+    # print(len(meetings_list), type(meetings_list))
+    # obj = Meetings.from_json(meetings_json)
+    # print(obj.to_json())
+    # print(meetings.first.date)

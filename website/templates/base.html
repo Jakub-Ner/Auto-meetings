@@ -76,32 +76,34 @@
 
         <header class="major" margin-bottom="100px">
             <a><h3 style="color:grey">Details of the next meeting</h3>
-                    {% with code, next = next_meeting() %}
-                        {% if code == 200 %}
-                            Next meeting starts at:  {{ next[0] }} {{ next[1] }} <br>
-                            It is named: {{ next[2] }} <br>
-                            Link: {{ next[3] }}
-                        {% else %}
-                            {{ next }}
-                        {% endif %}
-                    {% endwith %}
+                {% with code, next = next_meeting() %}
+                {% if code == 200 %}
+                Next meeting starts at: {{ next[0] }} {{ next[1] }} <br>
+                It is named: {{ next[2] }} <br>
+                Link: {{ next[3] }}
+                {% else %}
+                {{ next }}
+                {% endif %}
+                {% endwith %}
             </a>
         </header>
 
         <header class="major">
             <a><h3 align="center" style="color:grey">Meetings </h3>
                 <ul class="list-group list-group-flush" id="meeting">
+                    {% if meetings %}
                     {% for meeting in meetings %}
                     <form method="POST">
                         <li class="list-group-item text-left" style="background-color:#000000;">
-                            {{meeting[:-4] + ":"}} {{ meetings[meeting] }}
+                            {{meeting["name"][:-4] + ":"}} {{ meeting["date"] }} {{ meeting["link"] }}
 
-                            <button type="submit" class="btn-close pull-right" name="delete" value={{ meeting }}>
+                            <button type="submit" class="btn-close pull-right" name="delete" value={{meeting["name"]}}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </li>
                     </form>
                     {% endfor %}
+                    {% endif %}
                 </ul>
             </a>
         </header>

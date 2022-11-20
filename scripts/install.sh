@@ -5,8 +5,8 @@ SCRIPT_PATH=$(dirname "${SCRIPT}")
 MAIN_PATH=$(builtin cd ${SCRIPT_PATH}/../; pwd)
 #
 function CREATE_SUDOERS() {
-  echo "Cmnd_Alias SLEEP = /usr/sbin/rtcwake -u -m mem -s *"                           | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
-  echo "auto-meetings ALL=(ALL) NOPASSWD: SLEEP"                                       | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
+  echo "Cmnd_Alias SLEEP = /usr/sbin/rtcwake -u -m mem -s *"   | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
+  echo "auto-meetings ALL=(ALL) NOPASSWD: SLEEP"               | tee -a ${SCRIPT_PATH}/auto-meetings &>/dev/null
 }
 function CREATE_UNIT_FILE() {
   UNIT_PATH=${SCRIPT_PATH}/auto-meetings.service
@@ -63,3 +63,4 @@ chmod +220 ~/.bash_aliases # in case file was created during the script
 python3 ${MAIN_PATH}/browser/Auth.py
 sudo setfacl -m u:auto-meetings:rwx ${MAIN_PATH}/browser/credentials
 echo -e "\n Installation finished!\n"
+#

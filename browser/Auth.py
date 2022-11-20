@@ -28,8 +28,8 @@ class Auth:
             else:
                 self.__authorize()
 
-            with open(self.token_path, 'w+') as token:
-                token.write(self.creds.to_json())
+            # with open(self.token_path, 'w+') as token:
+            #     token.write(self.creds.to_json())
 
         self.service = build('gmail', 'v1', credentials=self.creds)
 

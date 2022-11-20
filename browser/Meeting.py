@@ -1,12 +1,13 @@
 import json
 from datetime import datetime
+from variables.config import config
 
 
 class Meeting:
     def __init__(self, name, date, link, next=None):
         self.name = name
         if isinstance(date, str):
-            self.date = datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
+            self.date = datetime.strptime(date, config['DATE_FORMAT'])
         else:
             self.date = date
         self.link = link
@@ -18,13 +19,13 @@ class Meeting:
 
 class MeetingEncoder(json.JSONEncoder):
     def default(self, o):
-        json = {}
+        _json = {}
         for key in o.__dict__:
             if key != "date":
-                json[key] = o.__dict__[key]
+                _json[key] = o.__dict__[key]
             else:
-                json[key] = str(o.__dict__[key])
-        return json
+                _json[key] = o.__dict__[key].strftime(config['DATE_FORMAT'])
+        return _json
 
 
 if __name__ == '__main__':

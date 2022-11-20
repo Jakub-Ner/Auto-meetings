@@ -8,6 +8,7 @@ from werkzeug.exceptions import BadRequestKeyError
 
 from .buttons import menu, delete
 from .jinja_functions import base, validate, save_meetings
+from browser.Meetings import Meetings, Meeting
 from variables.config import config
 
 website = Blueprint("views", __name__)
@@ -15,7 +16,7 @@ website = Blueprint("views", __name__)
 
 @website.route("/", methods=['GET', 'POST'])
 @base
-def home(meetings):
+def home(meetings: Meetings):
     if request.method == 'POST':
 
         # buttons
@@ -33,11 +34,12 @@ def home(meetings):
                 name = request.form["name"] + str(random.randint(1000, 10000))
 
                 try:
-                    date = str(date.strftime(config["DATE_FORMAT"]))
+                    date = str(date.strftime(config["DATE_FORMAT"]))  # ???
                 except: ...
+                logging.debug("before new meeting")
 
-                new_meeting = {name: {"date": date, "link": request.form["link"]}}
-                meetings.update(new_meeting)
+                new_meeting = Meeting(name, date, request.form["link"])
+                meetings.add(new_meeting)
                 save_meetings(meetings)
 
                 flash("Meeting added", category="success")
