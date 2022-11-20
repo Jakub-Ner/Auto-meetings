@@ -6,6 +6,7 @@ import json
 import os
 
 from browser.Meetings import Meetings
+from browser.MeetingsOpener import meeting_opener
 from variables.config import config
 
 
@@ -15,7 +16,7 @@ def base(func):
 
     def website(*args, **kwargs):
         func(meetings, *args, **kwargs)
-
+        meeting_opener.check_meeting(meetings.first)
         new_meetings_json = meetings.to_list()
         return render_template("base.html", meetings=new_meetings_json), 200
 
@@ -34,11 +35,10 @@ def save_meetings(meetings: Meetings):
 
 def next_meeting():
     meetings_path = "variables/meetings.json"
-
     # if file is empty give necessary datax
-    # with open(meetings_path, "w+") as file:
-    #     if os.stat(meetings_path).st_size == 0:
-    #         json.dump({}, file)
+    with open(meetings_path, "a+") as file:
+        if os.stat(meetings_path).st_size == 0:
+            json.dump({}, file)
 
     with open(meetings_path, "r") as file:
         meeting_json = json.load(file)
