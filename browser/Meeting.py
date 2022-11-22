@@ -16,6 +16,11 @@ class Meeting:
     def __gt__(self, other):
         return self.date > other.date
 
+    def __eq__(self, other):
+        if isinstance(other, Meeting):
+            return self.date == other.date and self.link == other.link
+        return False
+
 
 class MeetingEncoder(json.JSONEncoder):
     def default(self, o):

@@ -23,14 +23,13 @@ class Auth:
                 try:
                     self.creds.refresh(Request())
                 except RefreshError as error:
-                    logging.error(str(error))
+                    logging.error(f"Error during log in: {error}")
                     self.__authorize()
             else:
                 self.__authorize()
 
-            # with open(self.token_path, 'w+') as token:
-            #     token.write(self.creds.to_json())
-
+            with open(self.token_path, 'w+') as token:
+                token.write(self.creds.to_json())
         self.service = build('gmail', 'v1', credentials=self.creds)
 
     def __authorize(self):
@@ -42,4 +41,5 @@ class Auth:
         else:
             logging.error(
                 f'ERROR: {credentials_path} is missing! Please contact kubaner1@gmail.com in order to get it.')
+            raise FileNotFoundError
 

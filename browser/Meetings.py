@@ -1,6 +1,5 @@
 import logging
 import json
-from datetime import datetime
 
 from .Meeting import Meeting, MeetingEncoder
 
@@ -37,11 +36,19 @@ class Meetings:
         if not meetings_json:
             return cls()
 
-        meeting = Meeting(**meetings_json)
-        return cls(meeting)
+        prev_json = meetings_json
+        meetings_obj = cls(Meeting(**prev_json))
+        prev_obj = meetings_obj.first
+
+        while prev_json["next"] is not None:
+            prev_json = prev_json["next"]
+            prev_obj.next = (Meeting(**prev_json))
+            prev_obj = prev_obj.next
+
+        return meetings_obj
 
     def remove(self, name):
-        logging.debug(f"Removing meeting: name={name}")
+        print(self.__first.name)
         if self.__first is None:
             logging.debug('Trying to remove from empty meetings list')
             return
@@ -72,9 +79,8 @@ class Meetings:
         self.size -= 1
         return meeting
 
-    def add_many(self, meetings: list):
-        for meeting_dict in meetings:
-            meeting = Meeting(**meeting_dict)
+    def add_many(self, new_meetings: list):
+        for meeting in new_meetings:
             self.add(meeting)
 
     def add(self, meeting: Meeting):
@@ -83,9 +89,19 @@ class Meetings:
             self.__first = meeting
             return
 
-        prev = self.__binsearch(meeting)
-        tmp = prev.next
-        prev.next = meeting
+        prev, idx = self.__binsearch(meeting)
+        if idx <= 0:
+            tmp = self.__first
+            if tmp == meeting:
+                self.size -= 1
+                return
+            self.__first = meeting
+        else:
+            tmp = prev.next
+            if tmp == meeting:
+                self.size -= 1
+                return
+            prev.next = meeting
         meeting.next = tmp
 
     def __binsearch(self, meeting: Meeting):
@@ -105,7 +121,7 @@ class Meetings:
                 mid_idx = (last_idx + first_idx) // 2
                 mid_meeting = self.__further(self.__first, mid_idx)
 
-        return mid_meeting
+        return mid_meeting, mid_idx
 
     def __further(self, meeting: Meeting, mid_idx):
         for i in range(mid_idx):
@@ -114,30 +130,46 @@ class Meetings:
 
 
 if __name__ == '__main__':
-    m1 = Meeting('Plastyka', datetime(2020, 5, 1), 'www.plastyka.pl')
-    m2 = Meeting('biologia', datetime(2020, 5, 20), 'www.plastyka.pl')
-    m3 = Meeting('matma', datetime(2020, 5, 13), 'www.plastyka.pl')
-    m4 = Meeting('matma', datetime(2020, 5, 11), 'www.plastyka.pl')
-    m5 = Meeting('matma', datetime(2020, 5, 18), 'www.plastyka.pl')
-    m6 = Meeting('matma', datetime(2020, 5, 21), 'www.plastyka.pl')
-    m7 = Meeting('matma', datetime(2020, 5, 20), 'www.plastyka.pl')
-    m8 = Meeting('matma', datetime(2020, 5, 1), 'www.plastyka.pl')
-    m9 = Meeting('matma', datetime(2020, 5, 13), 'www.plastyka.pl')
-    m10 = Meeting('matma', datetime(2020, 5, 7), 'www.plastyka.pl')
+    # d = {'name': 'kubaner1@gmail.com7404', 'date': '28-03-2025 10:11', 'link': 'https://stackoverflow.com/',
+    #      'next': {'name': 'kubaner1@gmail.com1998', 'date': '22-11-2022 13:00',
+    #               'link': 'link:\r\nhttps://meet.google.com/hcd-mrsc-irp\r\notherwise,',
+    #               'next': {'name': 'kubaner1@gmail.com2256', 'date': '22-11-2022 13:00',
+    #                        'link': 'link:\r\nhttps://meet.google.com/hcd-mrsc-irp\r\notherwise,', 'next': None}}}
+    #
+    d = {"name": "kubaner1@gmail.com9224",
+         "date": "28-03-2023 10:11",
+         "link": "https://stackoverflow.com/",
+         "next": None}
+    m = Meetings().from_json(d)
+    m.add(Meeting("kubaner1@gmail.com4902", "22-11-2022 13:00", "dupa.pl"))
+    print(m.to_json())
+    m.add(Meeting("kubaner1@gmail.com4902", "22-11-2022 13:00", "dupa.pl"))
+    print(m.to_json())
+    # m.remove('kubaner1@gmail.com1998')
+    # m1 = Meeting('Plastyka', datetime(2020, 5, 1), 'www.plastyka.pl')
+    # m2 = Meeting('biologia', datetime(2020, 5, 20), 'www.plastyka.pl')
+    # m3 = Meeting('matma', datetime(2020, 5, 13), 'www.plastyka.pl')
+    # m4 = Meeting('matma', datetime(2020, 5, 11), 'www.plastyka.pl')
+    # m5 = Meeting('matma', datetime(2020, 5, 18), 'www.plastyka.pl')
+    # m6 = Meeting('matma', datetime(2020, 5, 21), 'www.plastyka.pl')
+    # m7 = Meeting('matma', datetime(2020, 5, 20), 'www.plastyka.pl')
+    # m8 = Meeting('matma', datetime(2020, 5, 1), 'www.plastyka.pl')
+    # m9 = Meeting('matma', datetime(2020, 5, 13), 'www.plastyka.pl')
+    # m10 = Meeting('matma', datetime(2020, 5, 7), 'www.plastyka.pl')
+    #
+    # meetings = Meetings(m1)
+    # meetings.add(m2)
+    # meetings.add(m3)
+    # meetings.add(m4)
+    # meetings.add(m5)
+    # meetings.add(m6)
+    # meetings.add(m7)
+    # meetings.add(m8)
+    # meetings.add(m9)
+    # meetings.add(m10)
 
-    meetings = Meetings(m1)
-    meetings.add(m2)
-    meetings.add(m3)
-    meetings.add(m4)
-    meetings.add(m5)
-    meetings.add(m6)
-    meetings.add(m7)
-    meetings.add(m8)
-    meetings.add(m9)
-    meetings.add(m10)
-
-    meetings_json = meetings.to_json()
-    print(meetings_json, type(meetings_json))
+    # meetings_json = meetings.to_json()
+    # print(meetings_json, type(meetings_json))
     # meetings_list = meetings.to_list()
     # print(len(meetings_list), type(meetings_list))
     # obj = Meetings.from_json(meetings_json)

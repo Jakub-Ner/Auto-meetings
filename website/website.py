@@ -36,7 +36,6 @@ def home(meetings: Meetings):
                 try:
                     date = str(date.strftime(config["DATE_FORMAT"]))  # ???
                 except: ...
-                logging.debug("before new meeting")
 
                 new_meeting = Meeting(name, date, request.form["link"])
                 meetings.add(new_meeting)
@@ -45,7 +44,7 @@ def home(meetings: Meetings):
                 flash("Meeting added", category="success")
         except BadRequestKeyError: ...
         except Exception as e:
-            logging.error(e)
+            logging.error(str(e))
 
 
 

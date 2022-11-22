@@ -18,18 +18,18 @@ class Opener:
     def check_meeting(self, meeting: Meeting):
         if meeting == self.next_meeting or meeting is None:
             return False
-        logging.debug("in opener: " + str(meeting))
         self.next_meeting = meeting
         self.sec_to_open = (meeting.date - datetime.now()).total_seconds()
 
         if self.waiting_thread.is_alive():
             self.waiting_thread.terminate()
             self.waiting_thread = Process(target=self.__wait_for_meeting)
+        else:
+            self.waiting_thread = Process(target=self.__wait_for_meeting)
 
         self.waiting_thread.start()
 
         if self.sec_to_open < 1:
-            logging.debug("opening meeting! LETS GOO")
             self.waiting_thread.terminate()
             try:
                 subprocess.run(f"notify-send 'Auto-meetings' '{meeting.name} starts in {self.sec_to_open} minutes'")

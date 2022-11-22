@@ -11,10 +11,10 @@ from variables.config import config
 
 
 def base(func):
-    with open("variables/meetings.json", "r") as file:
-        meetings = Meetings.from_json(json.load(file))
-
     def website(*args, **kwargs):
+        with open("variables/meetings.json", "r") as file:
+            meetings = Meetings.from_json(json.load(file))
+
         func(meetings, *args, **kwargs)
         meeting_opener.check_meeting(meetings.first)
         new_meetings_json = meetings.to_list()
@@ -26,7 +26,6 @@ def base(func):
 
 def save_meetings(meetings: Meetings):
     try:
-        logging.debug("saving meetings:")
         with open("variables/meetings.json", "w") as file:
             json.dump(meetings.to_json(), file)
     except Exception as e:
@@ -46,7 +45,6 @@ def next_meeting():
     if not meeting_json:
         return 404, "There is no any meeting"
 
-    logging.debug("meetings json: " + str(meeting_json))
     meetings = Meetings.from_json(meeting_json)
     meeting = meetings.first
 
@@ -81,3 +79,4 @@ def validate(date):
         return date
     except:
         return False
+

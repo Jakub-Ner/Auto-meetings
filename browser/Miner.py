@@ -8,6 +8,7 @@ class Miner:
         self.language = self.find_language(text)
         self.date = self.find_date(text)
         self.link = self.find_link(text)
+        logging.debug(f'found: Language: {self.language}, Date: {self.date}, Link: {self.link}')
 
     def find_language(self, text):
         # Here, You can add more dictionaries/special characters for other languages
@@ -25,23 +26,19 @@ class Miner:
     def find_link(self, text):
         domains = ['meet.google', 'zoom.', 'teams.microsoft']
 
-        words = text.split(' ')
+        words = text.replace('\n', ' ').replace('\r', ' ').split(' ')
         # find first word that contains domain
         for word in words:
             for domain in domains:
                 if domain in word:
                     return word
 
-        logging.error(f'No link found in:\n{text}')
         return None
 
     def find_date(self, text):
-        # if text is in language datefinder returns only one element,
-        # but if it is different language it returns 2:
-        # first with hh:mm = 00:00, second with correct
         date = list(datefinder.find_dates(text))
         logging.info(f'Dates found: {date}')
-        date = date[-1]
+        date = date[0]
 
         if self.language == 'en':
             return date
@@ -53,8 +50,7 @@ class Miner:
             for i, month in enumerate(months):
                 if month in text:
                     return date.replace(month=(i + 1))
-
-            logging.error(f'No month found in:\n{text}')
+        return date
 
 
 if __name__ == '__main__':

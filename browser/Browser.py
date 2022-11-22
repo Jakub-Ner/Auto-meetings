@@ -6,6 +6,7 @@ import random
 
 from variables.config import config
 from .Mail import Mail
+from .Meeting import Meeting
 from .MeetingsOpener import meeting_opener
 from .Meetings import Meetings
 
@@ -22,7 +23,13 @@ class Browser:
         with open(meetings_path, "r") as data:
             self.__meetings = Meetings.from_json(json.load(data))
 
+    counter = 0
+
     def search_meetings_periodically(self):
+        if self.counter != 0:
+            return
+        self.counter += 1
+
         while True:
             self.search_meetings()
             time.sleep(3 * 60 * 60)
@@ -38,29 +45,31 @@ class Browser:
         disposable_meetings = []
 
         mailbox = Mail()
-        if not mailbox.log_in():
+        try:
+            mailbox.log_in()
+        except FileNotFoundError:
+            logging.debug("Could not log in to mailbox")
             return
-
         try:
             for email in self.get_emails():
+                logging.debug(f"searching from {email}")
                 urls, dates = mailbox.extract_data_from_mail(email)
+
+                logging.debug(f"found {len(urls)} urls: {urls}")
 
                 for i in range(len(urls)):
                     name = email + str(random.randint(1000, 10000))
-                    disposable_meetings.append({
-                        name: {
-                            "date": dates[i],
-                            "link": urls[i]
-                        }
-                    })
+                    disposable_meetings.append(Meeting(name, dates[i], urls[i]))
 
-        except:
-            logging.error('ERROR: Lack of internet connection!')
+        except Exception as exception:
+            logging.error(f'ERROR: Lack of internet connection! or {exception}')
 
         with open("variables/meetings.json", "r") as file:
             self.__meetings = Meetings.from_json(json.load(file))
 
         self.__meetings.add_many(disposable_meetings)
+
+        logging.debug(f"added {len(disposable_meetings)} meetings")
 
         with open("variables/meetings.json", "w+") as data:
             json.dump(self.__meetings.to_json(), data)
@@ -71,7 +80,9 @@ class Browser:
 
     def get_emails(self):
         emails = []
-        for name in self.__meetings:
-            if '@' in name and name not in emails:
-                emails.append(name[:-4])
+        meeting = self.__meetings.first
+        while meeting is not None:
+            if '@' in meeting.name and meeting.name not in emails:
+                emails.append(meeting.name[:-4])
+            meeting = meeting.next
         return emails

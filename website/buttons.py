@@ -36,7 +36,7 @@ import logging
 def menu():
     try:
         if request.form["menu"] == "synchronize":
-            browser.search_meetings()
+            # browser.search_meetings()
             flash("Synchronization started", category="success")
 
     except Exception as e:
