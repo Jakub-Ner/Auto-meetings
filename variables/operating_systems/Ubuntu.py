@@ -1,4 +1,5 @@
-open_page = "usr/bin/xdg-open "
-open_obs = "obs-studio --startrecording &>/dev/null"
-close_obs = "pkill -f -9 obs-studio"
-start_sleep = 'sudo /usr/sbin/rtcwake -u -m mem -s '
+import shlex
+open_page = "xdg-open "
+open_obs = shlex.split("obs-studio --startrecording &>/dev/null")
+close_obs = shlex.split("pkill -f -9 obs-studio")
+start_sleep = shlex.split('sudo /usr/sbin/rtcwake -u -m mem -s ')
