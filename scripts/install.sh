@@ -39,8 +39,8 @@ echo -e "\n Cleaning before installing:\n"
 chmod +x ${SCRIPT_PATH}/uninstall.sh
 ${SCRIPT_PATH}/uninstall.sh
 #
-echo -e "\n Creating user auto-meetings:\n"
-sudo useradd auto-meetings
+echo -e "\n Create symbol linking to .XAUTHORITY:\n"
+/bin/bash -c 'ln -s -f "$XAUTHORITY" ~/.Xauthority'
 #
 echo -e "\n Installing python dependencies\n"
 sudo -H pip install -r ${SCRIPT_PATH}/dependencies.txt
