@@ -49,6 +49,7 @@ class Browser:
             mailbox.log_in()
         except FileNotFoundError:
             logging.debug("Could not log in to mailbox")
+            config["searching_flag"] = False
             return
         try:
             for email in self.get_emails():
@@ -75,7 +76,7 @@ class Browser:
             json.dump(self.__meetings.to_json(), data)
 
         meeting_opener.check_meeting(self.__meetings.first)
-        config["searching_flag"] = True
+        config["searching_flag"] = False
         logging.debug('Finished searching')
 
     def get_emails(self):

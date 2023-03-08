@@ -1,3 +1,4 @@
+from datetime import datetime
 import logging
 import datefinder
 
@@ -38,9 +39,11 @@ class Miner:
     def find_date(self, text):
         date = list(datefinder.find_dates(text))
         logging.info(f'Dates found: {date}')
-        date = date[0]
+        date = date[2 % len(date)]
 
         if self.language == 'en':
+            if date.date() < datetime.now().date():
+                return None
             return date
 
         # date may have incorrect month
@@ -50,6 +53,9 @@ class Miner:
             for i, month in enumerate(months):
                 if month in text:
                     return date.replace(month=(i + 1))
+
+        if date.date() < datetime.now().date():
+            return None
         return date
 
 
